@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+       <script src="js/Functions.Math.js"></script>
+       <script src="js/Ball.js"></script>
+      <script src="js/Line.js"></script>
+      <script src="js/SpringNodes.js"></script>
+      <title>Node Gravity</title>
+      
+      <script>
+          function init(){
+              springNodes = new SpringNodes(canvas);
+              setInterval(draw,60);
+          }
+      </script>
+    </head>
+  <body onLoad="init();" style="background-color: #000;" scroll="no">
+    <canvas id="canvas">
+    </canvas>
+  </body>
+</html>

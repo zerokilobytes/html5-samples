@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+       <script src="js/utility/RangeControl.js"></script>
+       <script src="js/Functions.Math.js"></script>
+       <script src="js/CanvasRenderingContext2D.js"></script>
+       <script src="js/Stage.js"></script>
+       <script src="js/Vector2D.js"></script>
+       <script src="js/Bound.js"></script>
+       <script src="js/Container.js"></script>
+       <script src="js/Segment.js"></script>
+       <script src="js/Line.js"></script>
+       <script src="js/Kinematics.js"></script>
+      <title>Kinematics</title>
+      
+      <script>
+          var stage;
+          var kinematics;
+
+          function init(){
+              stage = new Stage({element: canvas});
+              kinematics = new Kinematics();
+              setInterval(draw,60);
+          }
+          function draw(){
+              kinematics.draw();
+          }
+      </script>
+    </head>
+  <body onLoad="init();" scroll="no" style="background-color:black">
+    <canvas id="canvas"  style="background-color:white">
+    </canvas>
+  </body>
+</html>

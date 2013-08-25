@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+       <script src="js/Functions.Math.js"></script>
+       <script src="js/Bound.js"></script>
+       <script src="js/Ball.js"></script>
+      <script src="js/Line.js"></script>
+      <script src="js/AngleBounce.js"></script>
+      <title>Angle Bounce</title>
+      
+      <script>
+          var container;
+          
+          function init(){
+              angleBounce = new AngleBounce(canvas);
+              setInterval(draw,60);
+          }
+      </script>
+    </head>
+  <body onLoad="init();" scroll="no">
+    <canvas id="canvas">
+    </canvas>
+  </body>
+</html>

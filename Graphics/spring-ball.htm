@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <script src="js/SpringBall.js"></script>
+      <title>Spring Ball</title>
+      
+      <script>
+          var container;
+          
+          function init(){
+              container = new Container(canvas);
+              setInterval(draw,60);
+          }
+      </script>
+    </head>
+  <body onLoad="init();" scroll="no">
+    <canvas id="canvas">
+    </canvas>
+  </body>
+</html>

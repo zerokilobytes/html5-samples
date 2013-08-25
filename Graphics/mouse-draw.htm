@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+      <script src="js/MouseDraw.js"></script>
+      <script>
+        window.onload = function() {
+            var element = document.getElementById('canvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            var color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+            var draw = new MouseDraw(element, {color:color});
+        }
+      </script>
+     
+  </head>
+  <body>
+    <canvas  id="canvas"></canvas>
+  </body>
+</html>
+
+
