@@ -8,23 +8,23 @@ var Vector2D = function(x,y){
     
       this.getX = function(){
         return this.x;
-      }
+      };
       
       this.getY = function(){
         return this.y;
-      }
+      };
       
        this.setY = function(y){
         this.y = y;
-      }
+      };
       
       this.setX = function(x){
         this.x = x;
-      }
+      };
       
        this.getLength = function(){
           return Math.sqrt((this.getX() * this.getX()) + (this.getY() * this.getY()));
-      }
+      };
       
            
       this.subtract = function(position){
@@ -33,7 +33,7 @@ var Vector2D = function(x,y){
           vector.setY(this.getY() - position.getY());
 
           return vector;
-      }
+      };
 }
 
 var Velocity = function(x,y){
@@ -42,20 +42,20 @@ var Velocity = function(x,y){
     
     this.getX = function(){
         return this.x;
-      }
+      };
       
       this.getY = function(){
         return this.y;
-      }
+      };
       
        this.setY = function(y){
         this.y = y;
-      }
+      };
       
       this.setX = function(x){
         this.x = x;
-      }
-}
+      };
+};
 var Ball = function(context, x, y) {
       
       this.context = context;
@@ -64,14 +64,11 @@ var Ball = function(context, x, y) {
       this.color= '#0000FF';
       var mass = 10;
       this.bounce = -1;
- 
-      
+
       var position = new Vector2D(x,y);
       
       this.id = -1;
-      
-      
-    
+
       function init($this)
       {
         $this.id = $this.getUID();
@@ -101,19 +98,19 @@ var Ball = function(context, x, y) {
       
       this.getRadius = function(){
         return radius;
-      }
+      };
       
       this.getUID = function(){
           return Math.ceil((Math.random()*99999999)+1);
-      }
+      };
       
       this.getId = function(){
           return this.id;
-      }
+      };
       
       this.getX = function(){
         return position.getX();
-      }
+      };
       
       this.getY = function(){
         return position.getY();
@@ -121,17 +118,17 @@ var Ball = function(context, x, y) {
       
       this.setY = function(y){
         position.setY(y);
-      }
+      };
       
       this.setX = function(x){
         position.setX(x);
-      }
+      };
 
       
       this.getVelocityX = function()
       {
           return this.velocity.getX();
-      }
+      };
       this.getVelocityY = function(){
           return this.velocity.y;
       }
@@ -139,35 +136,35 @@ var Ball = function(context, x, y) {
       this.setVelocityX = function(x)
       {
          this.velocity.setX(x);
-      }
+      };
       this.setVelocityY = function(y)
       {
          this.velocity.setY(y);
-      }
+      };
       
       this.getMass = function(){
           return mass;
-      }
+      };
       
       this.bounceXAxis = function(){
           this.velocity.setX (- this.velocity.getX());
-      }
+      };
       
       this.bounceYAxis  = function(){
           this.velocity.setY(- this.velocity.y);
-      }
+      };
       
       this.detectCollision = function(){
         if((this.getX() - this.getRadius()) <= 0 || (this.getX() + this.getRadius()) > windowSize.width) this.bounceXAxis();
         if((this.getY() - this.getRadius()) <= 0 || (this.getY() + this.getRadius()) > windowSize.height) this.bounceYAxis();
         
         //console.log(this.velocity.x + "  " + this.velocity.y)
-      }
+      };
       
       this.move = function(){
           this.setX(this.getX() + this.getVelocityX());
           this.setY(this.getY() + this.getVelocityY());
-      }
+      };
       
       this.reDraw = function(){
           this.context.beginPath();
@@ -175,11 +172,11 @@ var Ball = function(context, x, y) {
           this.context.arc(this.getX(),this.getY(),this.getRadius(),0,Math.PI*2,true);
           this.context.closePath();
           this.context.fill();
-      }
+      };
       
       this.getPosition = function(){
           return position;
-      }
+      };
       
      
       this.colliding = function(ball){
