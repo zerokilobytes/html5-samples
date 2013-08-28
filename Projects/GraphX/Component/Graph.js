@@ -1,6 +1,12 @@
 var Graph = function() {
     this.layer = null;
     this.nodes = [];
+    
+    this.spring = 0.05;
+    this.friction = 0.95;
+    this.springLength = 300;
+    
+    
     this.init();
 };
 
@@ -17,5 +23,44 @@ Graph.prototype = {
     },
     draw: function() {
         this.layer.draw();
+    },
+    move: function() {
+        for (var i = 0; i < this.nodes.length; i++) {
+            for (var j = 0; j < this.nodes.length; j++) {
+                if (this.nodes[i] !== this.nodes[j]) {
+                	//if (!this.nodes[i].isDragging()) {
+                		this.springTo(this.nodes[i], this.nodes[j]);
+                	//}
+                }
+            }
+        }
+    },
+    update: function() {
+    	this.move();
+    },
+    springTo: function(nodeA, nodeB) {
+    	var c = 0.06 * timeDiff;
+    	
+        var dx = nodeB.getX() - nodeA.getX();
+        var dy = nodeB.getY() - nodeA.getY();
+        
+        //console.log(nodeB.getX());
+        return;
+        
+        var angle = Math.atan2(dy, dx);
+        var targetX = nodeB.getX() - Math.cos(angle) * this.springLength;
+        var targetY = nodeB.getY() - Math.sin(angle) * this.springLength;
+        nodeA.setVX(nodeA.getVX() + (targetX - nodeA.getX()) * this.spring * c);
+        nodeA.setVY(nodeA.getVY() + (targetY - nodeA.getY()) * this.spring * c);
+        nodeA.setVX (nodeA.getVX() * this.friction);
+        nodeA.setVY(nodeA.getVY() * this.friction);
+        nodeA.setX(nodeA.getX() + nodeA.getVX());
+        nodeA.setY(nodeA.getY() + nodeA.getVY());
+        
+        nodeA.update();
+        //nodeA.setX(0);
+       
+        //nodeA.content.setPosition(nodeA.x,nodeA.y);
+        //console.log("x " + x + " y" + );
     }
 };

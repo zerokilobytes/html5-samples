@@ -18,8 +18,8 @@ CanvasManager.prototype = {
     init: function() {
         this.stage = new Kinetic.Stage({
             container: 'graphx_canvas',
-            width: 600,
-            height: 400
+            width: 1000,
+            height: 800
         });
 
         this.graph = new Graph();
@@ -40,5 +40,8 @@ CanvasManager.prototype = {
     },
     draw : function(){
         this.graph.draw();
+    },
+    update : function(){
+        this.graph.update();
     }
 };
