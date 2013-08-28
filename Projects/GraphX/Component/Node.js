@@ -40,16 +40,16 @@ Node.prototype = {
     	this.content.setY(y);
     },
     getVX : function(){
-    	return this.content.vy;
+    	return this.vx;
     },
     getVY : function(){
-    	return this.content.vy;
+    	return this.vy;
     },
     setVX : function(vx){
-    	this.content.vx = vx;
+    	this.vx = vx;
     },
     setVY : function(vy){
-    	this.content.vy = vy;
+    	this.vy = vy;
     },
     isDragging: function(){
     	return this.content.isDragging();
