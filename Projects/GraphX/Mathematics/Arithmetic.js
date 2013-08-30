@@ -1,5 +1,5 @@
 var Arithmetic = function() {
-    function InvSqrt(number) {
+    function FastInverseSqrt(number) {
         var y = new Float32Array(1);
         var i = new Int32Array(y.buffer);
         var x2 = number * 0.5;
