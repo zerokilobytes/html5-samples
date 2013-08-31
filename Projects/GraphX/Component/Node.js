@@ -4,6 +4,31 @@ var Node = function(property) {
     this.vx = 0;
     this.vy = 0;
 
+    this.linkList = [];
+    this.styleName = "";
+    this.physicRepresentation = new Particle();
+    this.groupID;
+    this.type = "";
+    this.title = "";
+    this.repulsionsList = new Map();
+    this.isSelected = false;
+    this.isVisible = false;
+    this.isExplored = false;
+    this.url;
+    this.isDeployed = false;
+    this.sDisposed = false;
+    this.isDisposable = true;
+    this.actions = [];
+    this.refreshRate = -1;
+    this.downloadTime = new Date();
+    this.drawingInformation = "</>";
+    this.relativeSize = 1;
+    this.guid = 0;
+    this.isDisposed = false;
+    this.sUpToDate;
+    //EventHandler GUIDataChanged;
+    //EventHandler SelectionChanged;
+
     this.init();
 };
 
@@ -21,6 +46,52 @@ Node.prototype = {
 
         this.content.vx = 0;
         this.content.vy = 0;
+    },
+    dispose: function() {
+        if (this.isDisposable)
+        {
+            this.isDisposed = true;
+
+            for (var i = 0; i < this.linkList.length; i++) {
+                var element = this.linkList[i];
+                element.dispose();
+            }
+
+            this.physicRepresentation.Dispose();
+        }
+  },
+    relatedNodeList: function()
+    {
+        var nodes = [];
+
+        for (var i = 0; i < this.linkList.length; i++) {
+            var link = this.linkList[i];
+            nodes.push(link.getTheOppositeNode(this));
+        }
+
+        return nodes;
+    },
+    setRepulsion: function(node, repulsion)
+    {
+        // if there already was a repulsion force between the two nodes,
+        // we need to turn it off.
+        if (this.repulsionsList.ContainsKey(node))
+        {
+            this.repulsionsList[node].Dispose();
+        }
+
+        // sets the repulsion force
+        // (as repulsionList is a dictionnary, the entry will be added if it doesn't already exist)
+        this.repulsionsList[node] = repulsion;
+    },
+    getRepulsion: function(node) {
+        // the method is not protected because
+        // we assume here that there will always be an entry for the node
+        // (as all nodes repulse each other)
+        return this.repulsionsList[node];
+    },
+    setRelativeMass: function() {
+        this.physicRepresentation.mass = PhysicsConstants.particleDefaultMass + System.Math.Log(PhysicsConstants.particleDefaultMass * this.linkList.length);
     },
     getX: function() {
         return this.content.getPosition().x;
