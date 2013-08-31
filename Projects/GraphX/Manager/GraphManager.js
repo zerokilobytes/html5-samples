@@ -1,8 +1,8 @@
 /**
  * 
- * @returns {CanvasManager}
+ * @returns {GraphManager}
  */
-var CanvasManager = function() {
+var GraphManager = function() {
     this.canvas = null;
     this.stage = null;
     this.graph = null;
@@ -12,9 +12,9 @@ var CanvasManager = function() {
 
 /**
  * 
- * @type CanvasManager
+ * @type GraphManager
  */
-CanvasManager.prototype = {
+GraphManager.prototype = {
     init: function() {
         this.stage = new Kinetic.Stage({
             container: 'graphx_canvas',

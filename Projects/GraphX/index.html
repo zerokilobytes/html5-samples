@@ -8,7 +8,7 @@
        <script src="Utility/Map.js"></script>
        
        <script src="Main.js"></script>
-       <script src="Manager/CanvasManager.js"></script>
+       <script src="Manager/GraphManager.js"></script>
         <script src="Component/Graph.js"></script>
        <script src="Component/Particle.js"></script>
        <script src="Component/Node.js"></script>
@@ -18,7 +18,7 @@
       <script>
           function init(){
 
-        	  manager = new CanvasManager();
+        	  manager = new GraphManager();
                   var graph = manager.getGraph();
                   
         	  var node1 = new Node({x: 100, y: 200});
