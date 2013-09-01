@@ -55,21 +55,21 @@ GraphManager.prototype = {
     update: function() {
         this.graph.update();
     },
-    createNode: function(title, type, style, url) {
+    createNode: function(title, type) {
         var node = new Node();
 
-        node.styleName = style;
+        node.styleName = "";
         node.typeName = type;
-        node.Title = title;
-        node.url = url;
+        node.title = title;
+        node.url = "";
         return node;
     },
-    createEdge: function(text, nodeFrom, nodeTo, style, strength) {
-        var link = new Link(id, nodeFrom, nodeTo);
+    createEdge: function(text, nodeFrom, nodeTo) {
+        var link = new Edge(id, nodeFrom, nodeTo);
         this.linkList.push(link);
 
-        link.strength = strength;
-        link.styleName = style;
+        link.strength = 1;
+        link.styleName = "";
         link.verb = text;
         return link;
     },
@@ -87,10 +87,10 @@ GraphManager.prototype = {
         //start interval here
     },
     pause: function() {
-        this.timer.Stop();
+        this.timer.stop();
     },
     resume: function() {
-        this.timer.Start();
+        this.timer.start();
     },
     disposeObject: function(id) {
         //dispose all objects
@@ -99,7 +99,7 @@ GraphManager.prototype = {
 
     },
     settingsChanged: function() {
-        this.visibilityExplorationDepth = this.settings.InitialGraphVisibilityDepth;
+        this.visibilityExplorationDepth = this.settings.initialGraphVisibilityDepth;
     },
     updateGraph: function() {
         this.setVisibility();

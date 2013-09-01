@@ -13,11 +13,11 @@ Attraction.prototype = {
         this.end1 = end1;
         this.end2 = end2;
     },
-    IsOn: function() {
-        return Force.prototype.init.IsOn(this);
+    isOn: function() {
+        return Force.prototype.isOn.call(this);
     },
     apply: function() {
-        if (this.IsOn()) {
+        if (this.isOn()) {
             // Calculate distance between ends over the 3 dimensions
             var distX = this.end1.position.x - this.end2.position.x;
             var distY = this.end1.position.y - this.end2.position.y;

@@ -6,7 +6,7 @@ var Node = function(property) {
 
     this.linkList = [];
     this.styleName = "";
-    this.physicRepresentation = new Particle();
+    this.physicRepresentation = null;
     this.groupID;
     this.type = "";
     this.title = "";
@@ -57,7 +57,7 @@ Node.prototype = {
                 element.dispose();
             }
 
-            this.physicRepresentation.Dispose();
+            this.physicRepresentation.dispose();
         }
   },
     relatedNodeList: function()
@@ -75,9 +75,8 @@ Node.prototype = {
     {
         // if there already was a repulsion force between the two nodes,
         // we need to turn it off.
-        if (this.repulsionsList.ContainsKey(node))
-        {
-            this.repulsionsList[node].Dispose();
+        if (this.repulsionsList.get(node) !== null){
+            this.repulsionsList[node].dispose();
         }
 
         // sets the repulsion force
@@ -91,7 +90,7 @@ Node.prototype = {
         return this.repulsionsList[node];
     },
     setRelativeMass: function() {
-        this.physicRepresentation.mass = PhysicsConstants.particleDefaultMass + System.Math.Log(PhysicsConstants.particleDefaultMass * this.linkList.length);
+        this.physicRepresentation.mass = PhysicsConstants.particleDefaultMass + Math.log(PhysicsConstants.particleDefaultMass * this.linkList.length);
     },
     getX: function() {
         return this.content.getPosition().x;
