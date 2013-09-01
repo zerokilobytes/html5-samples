@@ -1,5 +1,5 @@
 var Node = function(property) {
-    this.property = property;
+    this.property = {x: 500, y: 500};
     this.content = null;
     this.vx = 0;
     this.vy = 0;
@@ -59,7 +59,7 @@ Node.prototype = {
 
             this.physicRepresentation.dispose();
         }
-  },
+    },
     relatedNodeList: function()
     {
         var nodes = [];
@@ -75,7 +75,7 @@ Node.prototype = {
     {
         // if there already was a repulsion force between the two nodes,
         // we need to turn it off.
-        if (this.repulsionsList.get(node) !== null){
+        if (this.repulsionsList.get(node) !== null) {
             this.repulsionsList[node].dispose();
         }
 

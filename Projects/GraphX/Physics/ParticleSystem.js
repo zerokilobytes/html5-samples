@@ -15,7 +15,7 @@ ParticleSystem.prototype = {
     {
         this.integrator = new Integrator(this);
         this.particles = [];
-        this.springs = []();
+        this.springs = [];
         this.attractions = [];
         this.gravity = new Vector3D(gx, gy, gz);
         this.drag = somedrag;

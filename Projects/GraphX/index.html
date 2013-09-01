@@ -1,38 +1,45 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-      <link rel="stylesheet" type="text/css" href="css/style.css">
-       <script src="Vendor/kinetic.js"></script>
-       
-       <script src="Mathematics/Vector3D.js"></script>
-       <script src="Utility/Map.js"></script>
-       
-       <script src="Main.js"></script>
-       <script src="Manager/GraphManager.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="Vendor/kinetic.js"></script>
+
+        <script src="Mathematics/Vector3D.js"></script>
+        <script src="Mathematics/Integrator.js"></script>
+
+        <script src="Utility/Map.js"></script>
+
+
+
+        <script src="Physics/ParticleSystem.js"></script>
+
+        <script src="Manager/KeyManager.js"></script>
+
+        <script src="Manager/PhysicsManager.js"></script>
+        <script src="Manager/CanvasManager.js"></script>
+        <script src="Manager/GraphManager.js"></script>
+        <script src="Manager/UniverseManager.js"></script>
+
+
+        <script src="Component/Settings.js"></script>
         <script src="Component/Graph.js"></script>
-       <script src="Component/Particle.js"></script>
-       <script src="Component/Node.js"></script>
-     
-      <title>GraphX</title>
-      
-      <script>
-          function init(){
+        <script src="Component/Particle.js"></script>
+        <script src="Component/Node.js"></script>
 
-        	  manager = new GraphManager();
-                  var graph = manager.getGraph();
-                  
-        	  var node1 = new Node({x: 100, y: 200});
-              var node2 = new Node({x: 500, y: 500});
-              var node3 = new Node({x: 800, y: 800});
+        <script src="Main.js"></script>
 
-        	  graph.addNode(node1);
-              graph.addNode(node2);
-              graph.addNode(node3);
-          }
-          
-      </script>
+        <title>Graph</title>
+
+        <script>
+            function init() {
+                universe = new UniverseManager();
+                universe.createNode("", "");
+                universe.createNode("", "");
+                universe.createNode("", "");
+            }
+        </script>
     </head>
-  <body scroll="no">
-  <div id="graphx_canvas"></div>
-  </body>
+    <body scroll="no">
+        <div id="graphx_canvas"></div>
+    </body>
 </html>

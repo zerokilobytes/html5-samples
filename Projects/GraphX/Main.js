@@ -1,4 +1,4 @@
-var manager;
+var universe = null;
 var time;
 var timeDiff;
 
@@ -16,8 +16,8 @@ window.requestAnimFrame = (function(callback)
 })();
 
 function Update(time) {
-    //console.log(time);
-	manager.update();
+    //console.log(universe);
+	universe.update();
 }
 
 function Loop(lastTime)
@@ -40,7 +40,7 @@ function Loop(lastTime)
 
 }
 function Draw() {
-    manager.draw();
+    universe.draw();
 }
 /*
  //Windows focus
@@ -53,7 +53,6 @@ function Draw() {
 window.onload = function() {
     var date = new Date();
     var time = date.getTime();
-    //stage = new Kinetic.Stage("canvas", ScreenWidth, ScreenHeight);
     init();
     Loop(time);
 };

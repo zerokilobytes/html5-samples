@@ -1,27 +1,28 @@
 
-var MainManager = function() {
+var UniverseManager = function() {
     this.settings;
     this.initializationFailed;
     this.random;
     this.javaScriptManager;
     this.keyManager;
     this.physicsManager;
-    this.modelManager;
-    this.viewManager;
+    this.graphManager;
+    this.canvasManager;
     this.assemblyManager;
     this.fileDownloadManager;
+    
+    this.init();
 };
 
-MainManager.prototype = {
+UniverseManager.prototype = {
     init: function()
     {
         // creating the model
-        this.modelManager = new GraphManager();
+        this.graphManager = new GraphManager();
         // creating the view from model and style
         this.initializeViewManager();
 
-        // set the Javascript incomming event
-        //this.javaScriptManager = new JavaScriptManager(this);
+        this.canvasManager = new CanvasManager();
 
         // creating the random engine
         //this.random = new Random(new Date());
@@ -39,22 +40,22 @@ MainManager.prototype = {
         this.initializationFailed = false;
 
         // run sub-tasks
-        this.modelManager.start();
+        this.graphManager.start();
         this.physicsManager.start();
-        this.viewManager.start();
+        this.canvasManager.start();
     },
     createNode: function(title, type) {
-        var node = this.modelManager.createNode(title, type);
-        x, y, z = 0;
+        var node = this.graphManager.createNode(title, type);
+        var x, y, z = 0;
         // set the physic representation of our link
-        this.physicsManager.addPhysicRepresentation(x, y, z, node, this.modelManager);
+        this.physicsManager.addPhysicRepresentation(x, y, z, node, this.graphManager);
 
         // set view to node
-        this.viewManager.setViewToNode(node);
+        //this.viewManager.setViewToNode(node);
 
         return node;
     },
-    createLink: function()
+    createEdge: function()
     {
         var link = null;
 
@@ -71,5 +72,12 @@ MainManager.prototype = {
     },
     initializeViewManager: function() {
 
-    }
+    },
+    
+    draw: function() {
+        this.graphManager.draw();
+    },
+    update: function() {
+        this.graphManager.update();
+    },
 };

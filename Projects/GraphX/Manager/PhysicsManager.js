@@ -13,7 +13,7 @@ PhysicsManager.prototype = {
     init: function(mainManager)
     {
         this.particleSystem = new ParticleSystem();
-        this.timer = new DispatcherTimer();
+        this.timer = null;
     },
     addPhysicRepresentation: function(x, y, z, node, model)
     {
