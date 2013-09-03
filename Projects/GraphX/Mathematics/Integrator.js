@@ -82,16 +82,17 @@ Integrator.prototype = {
         // for all particles added to the system
         // (difference between number of particles and actual size of vector),
         // add null vector to the 10 vector lists
-        for (; this.sys.numberOfParticles() > this.originalPositions.length; this.k4Velocities.push(new Vector3D())) {
-            this.originalPositions.push(new Vector3D());
-            this.originalVelocities.push(new Vector3D());
-            this.k1Forces.push(new Vector3D());
-            this.k1Velocities.push(new Vector3D());
-            this.k2Forces.push(new Vector3D());
-            this.k2Velocities.push(new Vector3D());
-            this.k3Forces.push(new Vector3D());
-            this.k3Velocities.push(new Vector3D());
-            this.k4Forces.push(new Vector3D());
+        for (var i = 0; this.sys.numberOfParticles() > this.originalPositions.length; i++){
+        	this.k4Velocities.push(new Vector3D());
+            this.originalPositions.push(new Vector3D(0.0,0.0, 0.0));
+            this.originalVelocities.push(new Vector3D(0.0,0.0, 0.0));
+            this.k1Forces.push(new Vector3D(0.0,0.0, 0.0));
+            this.k1Velocities.push(new Vector3D(0.0,0.0, 0.0));
+            this.k2Forces.push(new Vector3D(0.0,0.0, 0.0));
+            this.k2Velocities.push(new Vector3D(0.0,0.0, 0.0));
+            this.k3Forces.push(new Vector3D(0.0,0.0, 0.0));
+            this.k3Velocities.push(new Vector3D(0.0,0.0, 0.0));
+            this.k4Forces.push(new Vector3D(0.0,0.0, 0.0));
         }
     },
     // Here the problem is quite more complicated,
@@ -297,5 +298,6 @@ Integrator.prototype = {
             }
             p.age += deltaT;
         }
+        console.log(p.position);
     }
 };
