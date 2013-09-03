@@ -17,18 +17,18 @@ PhysicsManager.prototype = {
     },
     addPhysicRepresentation: function(x, y, z, node, model)
     {
+    	
         // if the node already exists and already has a physic representation then don't do anything, go back to where you come from.
         if (node.physicRepresentation !== null) {
             return;
         }
-
+       
         // else we create a physic representation
         var particle = this.particleSystem.makeParticle(x, y, z);
-
+        //console.log(particle);
         // create some space between the nodes 
         for (var otherNode in model.nodeList) {
-            if (otherNode.physicRepresentation !== null)
-            {
+            if (otherNode.physicRepresentation !== null){
                 var repulsion = this.particleSystem.makeAttraction(otherNode.physicRepresentation, particle, -1 * this.settings.repultionForce, PhysicsConstants.attractionEffectMinimalDistance);
                 node.setRepulsion(otherNode, repulsion);
                 otherNode.setRepulsion(node, repulsion);

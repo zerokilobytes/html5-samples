@@ -128,7 +128,6 @@ Integrator.prototype = {
             // Anyway, re-initialise forces applied to it
             p.force.clear();
         }
-
         // 2) Calculate forces for all system
         // depending on the original positions and velocities
         this.sys.applyForces();

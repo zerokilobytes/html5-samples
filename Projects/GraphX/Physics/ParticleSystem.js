@@ -14,11 +14,11 @@ ParticleSystem.prototype = {
     init: function(gx, gy, gz, somedrag)
     {
         this.integrator = new Integrator(this);
-        this.particles = new Array();
+        this.particles = [];
         this.springs = [];
         this.attractions = [];
-        this.gravity = new Vector3D(gx, gy, gz);
-        this.drag = somedrag;
+        this.gravity = new Vector3D(0.0, 0.0, 0.0);
+        this.drag = 0.0;
     },
     setGravity: function(x, y, z)
     {
@@ -38,13 +38,13 @@ ParticleSystem.prototype = {
         this.cleanUp();
         this.integrator.step(t);
     },
-    makeParticle: function(mass, x, y, z) {
+    makeParticle2: function(mass, x, y, z) {
         var p = new Particle(mass, new Vector3D(x, y, z));
         this.particles.push(p);
         this.integrator.allocateParticles();
         return p;
     },
-    makeParticle2: function(x, y, z) {
+    makeParticle: function(x, y, z) {
         var p = new Particle(PhysicsConstants.particleDefaultMass, new Vector3D(x, y, z));
         this.particles.push(p);
         this.integrator.allocateParticles();
@@ -68,14 +68,13 @@ ParticleSystem.prototype = {
         this.springs.clear();
         this.attractions.clear();
     },
-    applyForces: function()
-    {
+    applyForces: function(){
         var p;
         for (var i = 0; i < this.particles.length; i++) {
 
             p = this.particles[i];
-            p.force.add(this.gravity);
-            p.force.add(p.velocity.x * -this.drag, p.velocity.y * -this.drag, p.velocity.z * -this.drag);
+             p.force.add(this.gravity);
+            p.force.add(new Vector3D(p.velocity.x * -this.drag, p.velocity.y * -this.drag, p.velocity.z * -this.drag));
         }
 
         var s;
@@ -83,12 +82,16 @@ ParticleSystem.prototype = {
             s = this.springs[i];
             s.apply();
         }
+        
+        
 
         var a;
         for (var i = 0; i < this.attractions.length; i++) {
             a = this.attractions[i];
             a.apply();
         }
+        
+        
     },
     numberOfParticles: function()
     {
@@ -104,6 +107,7 @@ ParticleSystem.prototype = {
     },
     getParticle: function(i)
     {
+    	//console.log(this.particles[i].force);
         return this.particles[i];
     },
     getSpring: function(i)

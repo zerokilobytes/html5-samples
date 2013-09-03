@@ -9,7 +9,7 @@ var Vector3D = function(x, y, z) {
     /// Y coordinate of vector
     this.y = 0.0;
 
-    /// Z coodinate of vector
+    /// Z coordinate of vector
     this.z = 0.0;
 
     this.init(x, y, z);
@@ -68,7 +68,7 @@ Vector3D.prototype = {
         return this;
     },
     /**
-     * Substracts in place two vectors, coordinates by coordinates
+     * Subtracts in place two vectors, coordinates by coordinates
      */
     subtract: function(p) {
         this.x -= p.x;
@@ -76,19 +76,11 @@ Vector3D.prototype = {
         this.z -= p.z;
         return this;
     },
-    /**
-     * Adds in place given values to vector coordinates
-     */
-    add: function(a, b, c) {
-        this.x += a;
-        this.y += b;
-        this.z += c;
-        return this;
-    },
-            /**
-             *  Calculate the resultant of two vectors
-             */
-            plus: function(p) {
+
+	/**
+	 *  Calculate the resultant of two vectors
+	 */
+    plus: function(p) {
         return new Vector3D(this.x + p.x, this.y + p.y, this.z + p.z);
     },
     /**
@@ -170,7 +162,7 @@ Vector3D.prototype = {
         return "(" + this.x + ", " + this.y + ", " + this.z + ")";
     },
     /**
-     * Calculate vectorial product
+     * Calculate vertical product
      */
     cross: function(p) {
         return new Vector3D(

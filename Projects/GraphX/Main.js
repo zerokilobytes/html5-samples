@@ -1,7 +1,7 @@
 var universe = null;
 var time;
 var timeDiff;
-
+/*
 window.requestAnimFrame = (function(callback)
 {
     return window.requestAnimationFrame ||
@@ -12,6 +12,15 @@ window.requestAnimFrame = (function(callback)
             function(callback)
             {
                 window.setTimeout(callback, 1000 / 60);
+            };
+})();*/
+
+
+window.requestAnimFrame = (function(callback)
+{
+    return function(callback)
+            {
+                window.setTimeout(callback, 1500);
             };
 })();
 

@@ -46,7 +46,9 @@ UniverseManager.prototype = {
     },
     createNode: function(title, type) {
         var node = this.graphManager.createNode(title, type);
-        var x, y, z = 0;
+        var x = 0;
+        var y = 0;
+        var z = 0;
         // set the physic representation of our link
         this.physicsManager.addPhysicRepresentation(x, y, z, node, this.graphManager);
 

@@ -1,20 +1,20 @@
-var Particle = function(m, p) {
+var Particle = function(mass, position) {
     this.mass = 0.0;
     this.age = 0.0;
     this.isDisposedOf = false;
     this.isFixed = false;
     this.isEnable = false;
-    this.position = new Vector3D(0, 0, 0);
-    this.velocity = new Vector3D(0, 0, 0);
-    this.force = new Vector3D(0, 0, 0);
+    this.position = null;
+    this.velocity = null;
+    this.force = null;
 
-    this.init(m, p);
+    this.init(mass, position);
 };
 
 Particle.prototype = {
-    init: function(m, p) {
-        this.mass = m;
-        this.position = p;
+    init: function(mass, position) {
+        this.mass = mass;
+        this.position = position;
         this.isFixed = false;
         this.isEnable = true;
         this.age = 0.0;
@@ -30,13 +30,13 @@ Particle.prototype = {
         this.position.add(x, y, z);
     },
     setVelocity: function(x, y, z) {
-        this.velocity.Set(x, y, z);
+        this.velocity.set(x, y, z);
     },
     addVelocity: function(x, y, z) {
         this.velocity.add(x, y, z);
     },
     setForce: function(x, y, z) {
-        this.force.Set(x, y, z);
+        this.force.set(x, y, z);
     },
     makeFixed: function() {
         this.isFixed = true;
