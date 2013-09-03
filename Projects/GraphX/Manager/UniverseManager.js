@@ -78,6 +78,7 @@ UniverseManager.prototype = {
         this.graphManager.draw();
     },
     update: function() {
+        this.physicsManager.update();
         this.graphManager.update();
-    },
+    }
 };

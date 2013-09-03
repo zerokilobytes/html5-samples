@@ -97,6 +97,7 @@ Integrator.prototype = {
     // Here the problem is quite more complicated,
     // because position, velocity and resultant force on particle are thightly interwined
     step: function(deltaT){
+       //console.log("Integrator step");
         // Necessary for further intermediary calculations
         var result;
 

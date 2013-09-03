@@ -14,7 +14,7 @@ ParticleSystem.prototype = {
     init: function(gx, gy, gz, somedrag)
     {
         this.integrator = new Integrator(this);
-        this.particles = [];
+        this.particles = new Array();
         this.springs = [];
         this.attractions = [];
         this.gravity = new Vector3D(gx, gy, gz);
@@ -46,7 +46,7 @@ ParticleSystem.prototype = {
     },
     makeParticle2: function(x, y, z) {
         var p = new Particle(PhysicsConstants.particleDefaultMass, new Vector3D(x, y, z));
-        this.particles.add(p);
+        this.particles.push(p);
         this.integrator.allocateParticles();
         return p;
     },
@@ -72,9 +72,10 @@ ParticleSystem.prototype = {
     {
         var p;
         for (var i = 0; i < this.particles.length; i++) {
+
             p = this.particles[i];
-            p.force.push(this.gravity);
-            p.force.push(p.velocity.x * -this.drag, p.velocity.y * -this.drag, p.velocity.z * -this.drag);
+            p.force.add(this.gravity);
+            p.force.add(p.velocity.x * -this.drag, p.velocity.y * -this.drag, p.velocity.z * -this.drag);
         }
 
         var s;
@@ -129,27 +130,25 @@ ParticleSystem.prototype = {
     },
     cleanUp: function()
     {
-        var p;
         for (var i = 0; i < this.particles.length; i++) {
-            p = this.particles[i];
+
+            var p = this.particles[i];
             if (p.isDisposed())
             {
                 this.particles.removeAt(i--);
             }
         }
 
-        var s;
         for (var i = 0; i < this.springs.length; i++) {
-            s = this.springs[i];
+            var s = this.springs[i];
             if (s.isDisposed())
             {
                 this.springs.splice(i--, 1);
             }
         }
 
-        var a;
         for (var i = 0; i < this.attractions.length; i++) {
-            a = this.attractions[i];
+            var a = this.attractions[i];
             if (a.isDisposed())
             {
                 this.attractions.splice(i--, 1);

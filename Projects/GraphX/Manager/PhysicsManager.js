@@ -64,10 +64,10 @@ PhysicsManager.prototype = {
     resume: function() {
         this.timer.start();
     },
-    settings_Changed: function(sender, e) {
+    settings_Changed: function(e) {
 
     },
-    update: function(sender, e) {
+    update: function() {
         this.particleSystem.tick();
     },
     getSpringStrength: function(link) {
