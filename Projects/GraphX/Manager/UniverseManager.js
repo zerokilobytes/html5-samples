@@ -52,26 +52,26 @@ UniverseManager.prototype = {
         var z = 0;
 
         // set the physic representation of our link
-        this.physicsManager.addPhysicRepresentation(x, y, z, node, this.graphManager);
+        this.physicsManager.addNodePhysicRepresentation(x, y, z, node, this.graphManager);
 
         // set view to node
         //this.viewManager.setViewToNode(node);
 
         return node;
     },
-    createEdge: function()
+    createEdge: function(text, nodeFrom, nodeTo)
     {
         var link = null;
 
         // link creation
-        link = this.modelManager.createEdge(text, nodeFrom, nodeTo);
+        link = this.graphManager.createEdge(text, nodeFrom, nodeTo);
 
         // create the link in the physics engine
-        this.physicsManager.addPhysicRepresentation(link);
+        this.physicsManager.addEdgePhysicRepresentation(link);
 
         // create link in the graph
         //this.viewManager.setViewToLink(link);
-
+        console.log(link);
         return link;
     },
     initializeViewManager: function() {

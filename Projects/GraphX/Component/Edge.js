@@ -1,4 +1,4 @@
-var Edge = function() {
+var Edge = function(id, node1, node2) {
     /// <summary>
     /// The link's ID
     /// </summary>
@@ -118,6 +118,8 @@ var Edge = function() {
     /// Gets or sets the link's physical representation
     /// </summary>
     this.physicRepresentation = new Spring();
+    
+    this.init(id, node1, node2);
 };
 
 Edge.prototype = {
@@ -155,15 +157,16 @@ Edge.prototype = {
      */
     dispose: function() {
         // Remove current link from link list of both nodes
+        //TODO: FIX
         this.isDisposed = true;
-        this.relatedNode1.LinkList.Remove(this);
-        this.relatedNode2.LinkList.Remove(this);
-        this.relatedNode1.IsDeployed = false;
-        this.relatedNode2.IsDeployed = false;
-        this.relatedNode1.SetRelativeMass();
-        this.relatedNode2.SetRelativeMass();
+        this.relatedNode1.linkList.Remove(this);
+        this.relatedNode2.linkList.Remove(this);
+        this.relatedNode1.isDeployed = false;
+        this.relatedNode2.isDeployed = false;
+        this.relatedNode1.setRelativeMass();
+        this.relatedNode2.setRelativeMass();
         this.relatedNode1 = null;
         this.relatedNode2 = null;
-        this.physicRepresentation.Dispose();
+        this.physicRepresentation.dispose();
     }
 };

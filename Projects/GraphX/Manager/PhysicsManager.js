@@ -1,9 +1,6 @@
-var PhysicsManager = function(mainManager)
-{
+var PhysicsManager = function(mainManager){
     this.particleSystem;
-
     this.settings;
-
     this.timer;
 
     this.init(mainManager);
@@ -15,7 +12,7 @@ PhysicsManager.prototype = {
         this.particleSystem = new ParticleSystem();
         this.timer = null;
     },
-    addPhysicRepresentation: function(x, y, z, node, model)
+    addNodePhysicRepresentation: function(x, y, z, node, model)
     {
     	
         // if the node already exists and already has a physic representation then don't do anything, go back to where you come from.
@@ -36,7 +33,7 @@ PhysicsManager.prototype = {
         }
         node.physicRepresentation = particle;
     },
-    addPhysicRepresentation2: function(link)
+    addEdgePhysicRepresentation: function(link)
     {
         // if the link physic representation already exists then don't do anything
         if (link.physicRepresentation !== null) {
@@ -71,7 +68,7 @@ PhysicsManager.prototype = {
         this.particleSystem.tick();
     },
     getSpringStrength: function(link) {
-        springStrength;
+        var springStrength;
         springStrength = link.strength / 100;
         springStrength *= PhysicsConstants.maximalSpringStrength - PhysicsConstants.minimalSpringStrength;
         springStrength += PhysicsConstants.minimalSpringStrength;

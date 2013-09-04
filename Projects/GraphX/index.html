@@ -10,9 +10,11 @@
 
         <script src="Utility/Map.js"></script>
 
- 		<script src="Physics/PhysicsConstants.js"></script>
+        <script src="Physics/PhysicsConstants.js"></script>
         <script src="Physics/Particle.js"></script>
         <script src="Physics/ParticleSystem.js"></script>
+        <script src="Physics/Force.js"></script>
+        <script src="Physics/Spring.js"></script>
 
         <script src="Manager/KeyManager.js"></script>
 
@@ -25,6 +27,7 @@
         <script src="Component/Settings.js"></script>
         <script src="Component/Graph.js"></script>
         <script src="Component/Node.js"></script>
+        <script src="Component/Edge.js"></script>
 
         <script src="Main.js"></script>
 
@@ -33,9 +36,11 @@
         <script>
             function init() {
                 universe = new UniverseManager();
-                universe.createNode("", "");
-                universe.createNode("", "");
-                universe.createNode("", "");
+                var node1 = universe.createNode("", "");
+                var node2 = universe.createNode("", "");
+                var node3 =universe.createNode("", "");
+                
+                universe.createEdge("", node1, node2);
             }
         </script>
     </head>
