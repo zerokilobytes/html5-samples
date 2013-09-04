@@ -74,6 +74,7 @@ ParticleSystem.prototype = {
 
             p = this.particles[i];
              p.force.add(this.gravity);
+             console.log(this.gravity);
             p.force.add(new Vector3D(p.velocity.x * -this.drag, p.velocity.y * -this.drag, p.velocity.z * -this.drag));
         }
 

@@ -268,8 +268,8 @@ Integrator.prototype = {
 
             if (p.isFree())
             {
-                (this.k4Forces[i]).set(p.force);
-                (this.k4Velocities[i]).set(p.velocity);
+                this.k4Forces[i].set(p.force);
+                this.k4Velocities[i].set(p.velocity);
             }
         }
 
@@ -298,6 +298,6 @@ Integrator.prototype = {
             }
             p.age += deltaT;
         }
-        console.log(p.position);
+        //console.log(p);
     }
 };
