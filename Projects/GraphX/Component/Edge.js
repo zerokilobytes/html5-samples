@@ -117,7 +117,7 @@ var Edge = function(id, node1, node2) {
     /// <summary>
     /// Gets or sets the link's physical representation
     /// </summary>
-    this.physicRepresentation = new Spring();
+    this.physicRepresentation = null;
     
     this.init(id, node1, node2);
 };

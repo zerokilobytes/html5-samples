@@ -1,4 +1,4 @@
-var PhysicsManager = function(mainManager){
+var PhysicsManager = function(mainManager) {
     this.particleSystem;
     this.settings;
     this.timer;
@@ -10,31 +10,45 @@ PhysicsManager.prototype = {
     init: function(mainManager)
     {
         this.particleSystem = new ParticleSystem();
+        this.particleSystem.setGravity(new Vector3D(0.0, 1.0, 0.0));
         this.timer = null;
+        this.settings = new Settings();
     },
     addNodePhysicRepresentation: function(x, y, z, node, model)
     {
-    	
+
         // if the node already exists and already has a physic representation then don't do anything, go back to where you come from.
         if (node.physicRepresentation !== null) {
             return;
         }
-       
+
         // else we create a physic representation
         var particle = this.particleSystem.makeParticle(x, y, z);
+
+
+
+ 
+
+        //var otherNode
         //console.log(particle);
         // create some space between the nodes 
-        for (var otherNode in model.nodeList) {
-            if (otherNode.physicRepresentation !== null){
-                var repulsion = this.particleSystem.makeAttraction(otherNode.physicRepresentation, particle, -1 * this.settings.repultionForce, PhysicsConstants.attractionEffectMinimalDistance);
-                node.setRepulsion(otherNode, repulsion);
-                otherNode.setRepulsion(node, repulsion);
+        for (var i = 0; i < model.nodeList.length; i++) {
+           
+            if ( model.nodeList[i].physicRepresentation !== null) {
+              
+                var repulsion = this.particleSystem.makeAttraction( model.nodeList[i].physicRepresentation, particle, -1 * this.settings.repultionForce, PhysicsConstants.attractionEffectMinimalDistance);
+                node.setRepulsion( model.nodeList[i], repulsion);
+                 model.nodeList[i].setRepulsion(node, repulsion);
+                 
+                  console.log("model <<<<<<<<>>>>> " + model.nodeList.length);
+                        console.log(this.settings.repultionForce);
             }
         }
         node.physicRepresentation = particle;
     },
     addEdgePhysicRepresentation: function(link)
     {
+        console.log(">>> ");
         // if the link physic representation already exists then don't do anything
         if (link.physicRepresentation !== null) {
             // we update the strength of the physics representation
@@ -43,13 +57,15 @@ PhysicsManager.prototype = {
         }
 
         // else we calculate the spring strength
-        springStrength = this.getSpringStrength(link);
+        var springStrength = this.getSpringStrength(link);
+
+        console.log(">>>>>>>>> " + springStrength);
 
         // create the physic representation
         link.physicRepresentation = this.particleSystem.makeSpring(link.relatedNode1.physicRepresentation, link.relatedNode2.physicRepresentation, springStrength, PhysicsConstants.springDamping, this.settings.linkRestLength);
 
         // delete useless repulsion
-        link.relatedNode1.getRepulsion(link.relatedNode2).dispose();
+        //TO: DO :::::: link.relatedNode1.getRepulsion(link.relatedNode2).dispose();
     },
     start: function() {
         // initialising the update timer

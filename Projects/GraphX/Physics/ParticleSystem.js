@@ -20,12 +20,9 @@ ParticleSystem.prototype = {
         this.gravity = new Vector3D(0.0, 0.0, 0.0);
         this.drag = 0.0;
     },
-    setGravity: function(x, y, z)
+    setGravity: function(vector)
     {
-        this.gravity.set(x, y, z);
-    },
-    setGravity2: function(g) {
-        this.gravity.set(0.0, g, 0.0);
+        this.gravity.set(vector);
     },
     setDrag: function(d) {
         this.drag = d;
@@ -46,6 +43,8 @@ ParticleSystem.prototype = {
     },
     makeParticle: function(x, y, z) {
         var p = new Particle(PhysicsConstants.particleDefaultMass, new Vector3D(x, y, z));
+        console.log("makeParticle >>> ");
+         console.log(p);
         this.particles.push(p);
         this.integrator.allocateParticles();
         return p;
@@ -53,14 +52,14 @@ ParticleSystem.prototype = {
     makeParticle3: function() {
         return this.makeParticle(PhysicsConstants.particleDefaultMass, 0.0, 0.0, 0.0);
     },
-    makeSpring: function(end1, x, end2, sk, d, rl) {
+    makeSpring: function(end1, end2, sk, d, rl) {
         var s = new Spring(end1, end2, sk, d, rl);
         this.springs.push(s);
         return s;
     },
     makeAttraction: function(end1, end2, k, d) {
         var m = new Attraction(end1, end2, k, d);
-        this.attractions.add(m);
+        this.attractions.push(m);
         return m;
     },
     clear: function() {
@@ -68,13 +67,13 @@ ParticleSystem.prototype = {
         this.springs.clear();
         this.attractions.clear();
     },
-    applyForces: function(){
+    applyForces: function() {
         var p;
         for (var i = 0; i < this.particles.length; i++) {
 
             p = this.particles[i];
-             p.force.add(this.gravity);
-             console.log(this.gravity);
+            p.force.add(this.gravity);
+
             p.force.add(new Vector3D(p.velocity.x * -this.drag, p.velocity.y * -this.drag, p.velocity.z * -this.drag));
         }
 
@@ -83,16 +82,12 @@ ParticleSystem.prototype = {
             s = this.springs[i];
             s.apply();
         }
-        
-        
 
         var a;
         for (var i = 0; i < this.attractions.length; i++) {
             a = this.attractions[i];
             a.apply();
         }
-        
-        
     },
     numberOfParticles: function()
     {
@@ -108,7 +103,7 @@ ParticleSystem.prototype = {
     },
     getParticle: function(i)
     {
-    	//console.log(this.particles[i].force);
+        //console.log(this.particles[i].force);
         return this.particles[i];
     },
     getSpring: function(i)
@@ -140,12 +135,13 @@ ParticleSystem.prototype = {
             var p = this.particles[i];
             if (p.isDisposed())
             {
-                this.particles.removeAt(i--);
+                this.particles.splice(i--, 1);
             }
         }
 
         for (var i = 0; i < this.springs.length; i++) {
             var s = this.springs[i];
+            console.log(s);
             if (s.isDisposed())
             {
                 this.springs.splice(i--, 1);

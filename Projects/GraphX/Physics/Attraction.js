@@ -58,5 +58,8 @@ Attraction.prototype = {
             }
 
         }
+    },
+    isDisposed: function() {
+
     }
 };

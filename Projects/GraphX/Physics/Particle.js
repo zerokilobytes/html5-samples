@@ -22,21 +22,21 @@ Particle.prototype = {
         this.velocity = new Vector3D(0, 0, 0);
         this.force = new Vector3D(0, 0, 0);
     },
-    MoveTo: function(x, y, z) {
-        this.position.set(x, y, z);
+    moveTo: function(vector) {
+        this.position.set(vector);
     },
-    moveBy: function(x, y, z)
+    moveBy: function(vector)
     {
-        this.position.add(x, y, z);
+        this.position.add(vector);
     },
-    setVelocity: function(x, y, z) {
-        this.velocity.set(x, y, z);
+    setVelocity: function(vector) {
+        this.velocity.set(vector);
     },
-    addVelocity: function(x, y, z) {
-        this.velocity.add(x, y, z);
+    addVelocity: function(vector) {
+        this.velocity.add(vector);
     },
-    setForce: function(x, y, z) {
-        this.force.set(x, y, z);
+    setForce: function(vector) {
+        this.force.set(vector);
     },
     makeFixed: function() {
         this.isFixed = true;
@@ -53,7 +53,5 @@ Particle.prototype = {
     },
     isDisposed: function() {
         return this.isDisposedOf;
-    },
-      help:function(){},
+    }
 };
-

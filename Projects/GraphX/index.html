@@ -15,6 +15,7 @@
         <script src="Physics/ParticleSystem.js"></script>
         <script src="Physics/Force.js"></script>
         <script src="Physics/Spring.js"></script>
+        <script src="Physics/Attraction.js"></script>
 
         <script src="Manager/KeyManager.js"></script>
 
@@ -35,6 +36,12 @@
 
         <script>
             function init() {
+                /* var m = new Map();
+                m.put(new Node());
+                console.log(m);
+                
+                return ;*/
+                
                 universe = new UniverseManager();
                 var node1 = universe.createNode("", "");
                 var node2 = universe.createNode("", "");

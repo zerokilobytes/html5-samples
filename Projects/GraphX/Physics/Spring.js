@@ -23,8 +23,7 @@ Spring.prototype = {
     isOn: function() {
         return Force.prototype.isOn.call(this);
     },
-    apply: function()
-    {
+    apply: function(){
         if (this.isOn()) {
             // Calculate distance between ends over the 3 dimensions
             var distX = this.end1.position.x - this.end2.position.x;
@@ -82,5 +81,8 @@ Spring.prototype = {
                 this.end2.force.add(-distX, -distY, -distZ);
             }
         }
+    },
+    isDisposed: function() {
+
     }
 };

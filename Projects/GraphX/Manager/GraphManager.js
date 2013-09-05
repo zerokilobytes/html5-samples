@@ -63,6 +63,7 @@ GraphManager.prototype = {
         node.title = title;
         node.url = "";
         
+        this.nodeList.push(node);
         this.graph.addNode(node);
         
         return node;
@@ -71,7 +72,7 @@ GraphManager.prototype = {
         var link = new Edge(text, nodeFrom, nodeTo);
         this.linkList.push(link);
 
-        link.strength = 1;
+        link.strength = 50;
         link.styleName = "";
         link.verb = text;
         return link;

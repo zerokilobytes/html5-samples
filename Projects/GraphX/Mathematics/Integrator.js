@@ -298,6 +298,6 @@ Integrator.prototype = {
             }
             p.age += deltaT;
         }
-        //console.log(p);
+        console.log(p.position);
     }
 };

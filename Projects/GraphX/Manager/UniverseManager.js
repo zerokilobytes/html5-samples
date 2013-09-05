@@ -68,7 +68,7 @@ UniverseManager.prototype = {
 
         // create the link in the physics engine
         this.physicsManager.addEdgePhysicRepresentation(link);
-
+console.log(">>> ");
         // create link in the graph
         //this.viewManager.setViewToLink(link);
         console.log(link);
