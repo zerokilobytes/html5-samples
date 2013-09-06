@@ -26,7 +26,7 @@ window.requestAnimFrame = (function(callback)
 
 function Update(time) {
     //console.log(universe);
-	universe.update();
+	universe.update(timeDiff);
 }
 
 function Loop(lastTime)

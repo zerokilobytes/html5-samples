@@ -36,6 +36,6 @@ Force.prototype = {
     dispose: function() {
         this.isDisposed = true;
     },
-    Apply: function() {
+    apply: function() {
     }
 };

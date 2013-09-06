@@ -27,12 +27,12 @@ ParticleSystem.prototype = {
     setDrag: function(d) {
         this.drag = d;
     },
-    tick: function() {
+   /* tick: function() {
         this.cleanUp();
         this.integrator.step(1.0);
-    },
-    tick2: function(t) {
-        this.cleanUp();
+    },*/
+    tick: function(t) {
+        //this.cleanUp();
         this.integrator.step(t);
     },
     makeParticle2: function(mass, x, y, z) {
@@ -43,8 +43,7 @@ ParticleSystem.prototype = {
     },
     makeParticle: function(x, y, z) {
         var p = new Particle(PhysicsConstants.particleDefaultMass, new Vector3D(x, y, z));
-        console.log("makeParticle >>> ");
-         console.log(p);
+       
         this.particles.push(p);
         this.integrator.allocateParticles();
         return p;
@@ -75,6 +74,8 @@ ParticleSystem.prototype = {
             p.force.add(this.gravity);
 
             p.force.add(new Vector3D(p.velocity.x * -this.drag, p.velocity.y * -this.drag, p.velocity.z * -this.drag));
+            
+           
         }
 
         var s;

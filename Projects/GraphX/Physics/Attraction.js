@@ -53,8 +53,8 @@ Attraction.prototype = {
                 distZ *= force;
 
                 // Add the a new force to both ends
-                end1.Force.Add(-distX, -distY, -distZ);
-                end2.Force.Add(distX, distY, distZ);
+                end1.Force.add(new Vector3D(-distX, -distY, -distZ));
+                end2.Force.add(new Vector3D(distX, distY, distZ));
             }
 
         }

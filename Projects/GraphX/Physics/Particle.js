@@ -40,7 +40,7 @@ Particle.prototype = {
     },
     makeFixed: function() {
         this.isFixed = true;
-        this.velocity.Clear();
+        this.velocity.clear();
     },
     isFree: function() {
         return !this.isFixed;

@@ -82,23 +82,23 @@ Integrator.prototype = {
         // for all particles added to the system
         // (difference between number of particles and actual size of vector),
         // add null vector to the 10 vector lists
-        for (var i = 0; this.sys.numberOfParticles() > this.originalPositions.length; i++){
-        	this.k4Velocities.push(new Vector3D());
-            this.originalPositions.push(new Vector3D(0.0,0.0, 0.0));
-            this.originalVelocities.push(new Vector3D(0.0,0.0, 0.0));
-            this.k1Forces.push(new Vector3D(0.0,0.0, 0.0));
-            this.k1Velocities.push(new Vector3D(0.0,0.0, 0.0));
-            this.k2Forces.push(new Vector3D(0.0,0.0, 0.0));
-            this.k2Velocities.push(new Vector3D(0.0,0.0, 0.0));
-            this.k3Forces.push(new Vector3D(0.0,0.0, 0.0));
-            this.k3Velocities.push(new Vector3D(0.0,0.0, 0.0));
-            this.k4Forces.push(new Vector3D(0.0,0.0, 0.0));
+        for (var i = 0; this.sys.numberOfParticles() > this.originalPositions.length; i++) {
+            this.k4Velocities.push(new Vector3D());
+            this.originalPositions.push(new Vector3D(0.0, 0.0, 0.0));
+            this.originalVelocities.push(new Vector3D(0.0, 0.0, 0.0));
+            this.k1Forces.push(new Vector3D(0.0, 0.0, 0.0));
+            this.k1Velocities.push(new Vector3D(0.0, 0.0, 0.0));
+            this.k2Forces.push(new Vector3D(0.0, 0.0, 0.0));
+            this.k2Velocities.push(new Vector3D(0.0, 0.0, 0.0));
+            this.k3Forces.push(new Vector3D(0.0, 0.0, 0.0));
+            this.k3Velocities.push(new Vector3D(0.0, 0.0, 0.0));
+            this.k4Forces.push(new Vector3D(0.0, 0.0, 0.0));
         }
     },
     // Here the problem is quite more complicated,
     // because position, velocity and resultant force on particle are thightly interwined
-    step: function(deltaT){
-       //console.log("Integrator step");
+    step: function(deltaT) {
+        //console.log("Integrator step " + deltaT);
         // Necessary for further intermediary calculations
         var result;
 
@@ -107,7 +107,6 @@ Integrator.prototype = {
 
         // Locking the thread to ensure size of 10 vectors won't change
         // Supposingly number of particles is constant during function
-        // because of lock() in ParicleSystem.tick()
         // 1) Get original position and velocity of each particle
         for (var i = 0; i < this.sys.numberOfParticles(); i++)
         {
@@ -116,22 +115,29 @@ Integrator.prototype = {
             if (!p.isEnable)
             {
                 continue;
+
             }
 
             // If the particle is able to move freely
             if (p.isFree())
             {
+
                 // Set original position and velocity values to actual position and velocity of particle
                 this.originalPositions[i].set(p.position);
                 this.originalVelocities[i].set(p.velocity);
             }
 
+
             // Anyway, re-initialise forces applied to it
-            p.force.clear();
+            // p.force.clear();
         }
         // 2) Calculate forces for all system
         // depending on the original positions and velocities
         this.sys.applyForces();
+
+        //console.log("Delta >> " + deltaT);
+        console.log(p.force);
+        //return;
 
         // 3) For each particle calculate k1 for force and velocity
         for (var i = 0; i < this.sys.numberOfParticles(); i++)
@@ -163,9 +169,17 @@ Integrator.prototype = {
 
             if (p.isFree())
             {
+                p.position.set(this.k1Velocities[i]);
 
-                p.position.set(this.k1Velocities[i].times(0.5 * deltaT).plus(this.originalPositions[i]));
-                p.velocity.set((this.k1Forces[i]).times(0.5 * deltaT / p.mass).plus(this.originalVelocities[i]));
+                p.position.times(0.5 * deltaT);
+                p.position.plus(this.originalPositions[i]);
+
+                p.velocity.set(this.k1Forces[i]);
+                p.velocity.times(0.5 * deltaT / p.mass);
+                p.velocity.plus(this.originalVelocities[i]);
+
+
+
             }
         }
 
@@ -205,9 +219,11 @@ Integrator.prototype = {
 
             if (p.isFree())
             {
+                p.position.set(this.k2Velocities[i].times(0.5 * deltaT));
+                p.position.plus(this.originalPositions[i]);
 
-                p.position.set(this.k2Velocities[i].times(0.5 * deltaT).plus(this.originalPositions[i]));
-                p.velocity.set(this.k2Forces[i].times(0.5 * deltaT / p.mass).plus(this.originalVelocities[i]));
+                p.velocity.set(this.k2Forces[i].times(0.5 * deltaT / p.mass));
+                p.velocity.plus(this.originalVelocities[i]);
             }
         }
 
@@ -246,9 +262,12 @@ Integrator.prototype = {
 
             if (p.isFree())
             {
+                p.position.set(this.k3Velocities[i].times(deltaT));
+                p.position.plus(this.originalPositions[i]);
 
-                p.position.set(this.k3Velocities[i].times(deltaT).plus(this.originalPositions[i]));
-                p.velocity.set((this.k3Forces[i]).times(deltaT / p.mass).plus(this.originalVelocities[i]));
+                p.velocity.set(this.k3Forces[i]);
+                p.velocity.times(deltaT / p.mass);
+                p.velocity.plus(this.originalVelocities[i]);
             }
         }
 
@@ -275,7 +294,7 @@ Integrator.prototype = {
 
         // 13) For each particle, set final position and velocity,
         // depending on original values and k1, k2, k3 and k4 values
-        for (var i = 0; i < this.sys.numberOfParticles(); i++){
+        for (var i = 0; i < this.sys.numberOfParticles(); i++) {
             p = this.sys.getParticle(i);
 
             if (!p.isEnable)
@@ -285,19 +304,28 @@ Integrator.prototype = {
 
             if (p.isFree())
             {
-
-                result = (this.k1Velocities[i]).plus((this.k2Velocities[i]).times(2.0)).plus((this.k3Velocities[i]).times(2.0)).plus(this.k4Velocities[i]);
-                result.multiplyBy(deltaT / 6.0);
-                result.add(this.originalPositions[i]);
+                result = this.k1Velocities[i].plus((this.k2Velocities[i]));
+                result = result.times(2.0);
+                result = result.plus(this.k3Velocities[i]);
+                result = result.times(2.0);
+                result = result.plus(this.k4Velocities[i]);
+                result = result.multiplyBy(deltaT / 6.0);
+                result = result.add(this.originalPositions[i]);
                 p.position.set(result);
 
-                result = (this.k1Forces[i]).plus((this.k2Forces[i]).times(2.0)).plus((this.k3Forces[i]).times(2.0)).plus(this.k4Forces[i]);
-                result.multiplyBy(deltaT / (6.0 * p.mass));
-                result.add(this.originalVelocities[i]);
+                result = this.k1Forces[i].plus((this.k2Forces[i]).times(2.0));
+                result = result.plus(this.k3Forces[i]);
+                result = result.times(2.0);
+                result = result.plus(this.k4Forces[i]);
+                result = result.multiplyBy(deltaT / (6.0 * p.mass));
+                result = result.add(this.originalVelocities[i]);
                 p.velocity.set(result);
+
+
             }
             p.age += deltaT;
         }
-        console.log(p.position);
+        //console.log(p.position);
+        //console.log(p.position);
     }
 };

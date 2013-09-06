@@ -16,7 +16,6 @@ var Node = function(property) {
     this.isExplored = false;
     this.url;
     this.isDeployed = false;
-    this.sDisposed = false;
     this.isDisposable = true;
     this.actions = [];
     this.refreshRate = -1;

@@ -10,7 +10,7 @@ PhysicsManager.prototype = {
     init: function(mainManager)
     {
         this.particleSystem = new ParticleSystem();
-        this.particleSystem.setGravity(new Vector3D(0.0, 1.0, 0.0));
+        this.particleSystem.setGravity(new Vector3D(0.0, 0.0, 0.0));
         this.timer = null;
         this.settings = new Settings();
     },
@@ -80,8 +80,8 @@ PhysicsManager.prototype = {
     settings_Changed: function(e) {
 
     },
-    update: function() {
-        this.particleSystem.tick();
+    update: function(time) {
+        this.particleSystem.tick(time);
     },
     getSpringStrength: function(link) {
         var springStrength;

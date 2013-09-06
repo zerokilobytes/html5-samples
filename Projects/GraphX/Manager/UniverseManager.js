@@ -81,8 +81,8 @@ console.log(">>> ");
     draw: function() {
         this.graphManager.draw();
     },
-    update: function() {
-        this.physicsManager.update();
+    update: function(time) {
+        this.physicsManager.update(time);
         this.graphManager.update();
     }
 };

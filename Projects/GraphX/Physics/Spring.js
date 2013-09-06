@@ -1,9 +1,11 @@
-var Spring = function()
+var Spring = function(end1, end2, sk, d, rl)
 {
     this.springConstant;
     this.damping;
     this.restLength;
     this.strength;
+
+    this.init(end1, end2, sk, d, rl);
 };
 
 Spring.prototype = {
@@ -23,7 +25,7 @@ Spring.prototype = {
     isOn: function() {
         return Force.prototype.isOn.call(this);
     },
-    apply: function(){
+    apply: function() {
         if (this.isOn()) {
             // Calculate distance between ends over the 3 dimensions
             var distX = this.end1.position.x - this.end2.position.x;
@@ -33,6 +35,7 @@ Spring.prototype = {
 
             var oneOverDist = Arithmetic.fastInverseSqrt((distX * distX) + (distY * distY) + (distZ * distZ));
             var dist = 1.0 / oneOverDist;
+
 
             // Distance calculation is fast but not very precise, so :                
             if (dist === 0.0)
@@ -69,16 +72,17 @@ Spring.prototype = {
             distY *= r;
             distZ *= r;
 
+
             // If end1 is able to move, adds the a new force to it
             if (this.end1.isFree())
             {
-                this.end1.force.add(distX, distY, distZ);
+                this.end1.force.add(new Vector3D(distX, distY, distZ));
             }
 
             // If end1 is able to move, adds the a new force to it
             if (this.end2.isFree())
             {
-                this.end2.force.add(-distX, -distY, -distZ);
+                this.end2.force.add(new Vector3D(-distX, -distY, -distZ));
             }
         }
     },
