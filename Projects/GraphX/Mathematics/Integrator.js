@@ -98,6 +98,7 @@ Integrator.prototype = {
     // Here the problem is quite more complicated,
     // because position, velocity and resultant force on particle are thightly interwined
     step: function(deltaT) {
+        deltaT = deltaT/1000;
         //console.log("Integrator step " + deltaT);
         // Necessary for further intermediary calculations
         var result;
@@ -126,17 +127,18 @@ Integrator.prototype = {
                 this.originalPositions[i].set(p.position);
                 this.originalVelocities[i].set(p.velocity);
             }
-
+        console.log("Degub 1");
+        console.log(p.position);
 
             // Anyway, re-initialise forces applied to it
-            // p.force.clear();
+             p.force.clear();
         }
         // 2) Calculate forces for all system
         // depending on the original positions and velocities
         this.sys.applyForces();
 
         //console.log("Delta >> " + deltaT);
-        console.log(p.force);
+        //console.log(p);
         //return;
 
         // 3) For each particle calculate k1 for force and velocity
@@ -325,7 +327,5 @@ Integrator.prototype = {
             }
             p.age += deltaT;
         }
-        //console.log(p.position);
-        //console.log(p.position);
     }
 };

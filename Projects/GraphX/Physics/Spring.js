@@ -32,10 +32,8 @@ Spring.prototype = {
             var distY = this.end1.position.y - this.end2.position.y;
             var distZ = this.end1.position.z - this.end2.position.z;
 
-
             var oneOverDist = Arithmetic.fastInverseSqrt((distX * distX) + (distY * distY) + (distZ * distZ));
             var dist = 1.0 / oneOverDist;
-
 
             // Distance calculation is fast but not very precise, so :                
             if (dist === 0.0)
@@ -71,7 +69,6 @@ Spring.prototype = {
             distX *= r;
             distY *= r;
             distZ *= r;
-
 
             // If end1 is able to move, adds the a new force to it
             if (this.end1.isFree())

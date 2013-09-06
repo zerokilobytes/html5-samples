@@ -19,8 +19,8 @@ Particle.prototype = {
         this.isEnable = true;
         this.age = 0.0;
         this.isDisposedOf = false;
-        this.velocity = new Vector3D(0, 0, 0);
-        this.force = new Vector3D(0, 0, 0);
+        this.velocity = new Vector3D(0.0, 0.0, 0.0);
+        this.force = new Vector3D(0.0, 0.0, 0.0);
     },
     moveTo: function(vector) {
         this.position.set(vector);

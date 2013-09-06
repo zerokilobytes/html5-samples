@@ -24,11 +24,8 @@ PhysicsManager.prototype = {
 
         // else we create a physic representation
         var particle = this.particleSystem.makeParticle(x, y, z);
-
-
-
- 
-
+       
+        
         //var otherNode
         //console.log(particle);
         // create some space between the nodes 
@@ -39,9 +36,6 @@ PhysicsManager.prototype = {
                 var repulsion = this.particleSystem.makeAttraction( model.nodeList[i].physicRepresentation, particle, -1 * this.settings.repultionForce, PhysicsConstants.attractionEffectMinimalDistance);
                 node.setRepulsion( model.nodeList[i], repulsion);
                  model.nodeList[i].setRepulsion(node, repulsion);
-                 
-                  console.log("model <<<<<<<<>>>>> " + model.nodeList.length);
-                        console.log(this.settings.repultionForce);
             }
         }
         node.physicRepresentation = particle;
@@ -88,6 +82,7 @@ PhysicsManager.prototype = {
         springStrength = link.strength / 100;
         springStrength *= PhysicsConstants.maximalSpringStrength - PhysicsConstants.minimalSpringStrength;
         springStrength += PhysicsConstants.minimalSpringStrength;
+        console.log(springStrength);
         return springStrength;
     }
 };

@@ -72,7 +72,7 @@ Node.prototype = {
     },
     setRepulsion: function(node, repulsion)
     {
-        
+    	console.log(this.repulsionsList);
         // if there already was a repulsion force between the two nodes,
         // we need to turn it off.
         if (this.repulsionsList.get(node) !== undefined) {

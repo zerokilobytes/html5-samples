@@ -43,9 +43,15 @@ ParticleSystem.prototype = {
     },
     makeParticle: function(x, y, z) {
         var p = new Particle(PhysicsConstants.particleDefaultMass, new Vector3D(x, y, z));
+      
        
         this.particles.push(p);
+        
+        
+        
         this.integrator.allocateParticles();
+        
+         
         return p;
     },
     makeParticle3: function() {
