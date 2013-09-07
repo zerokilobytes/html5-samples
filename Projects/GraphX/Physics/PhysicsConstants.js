@@ -4,8 +4,8 @@ var PhysicsConstants = function() {
 PhysicsConstants.prototype = {
 };
 
-PhysicsConstants.initialGravityValue = 0;
-PhysicsConstants.particleDefaultMass = 1;
+PhysicsConstants.initialGravityValue = 0.0;
+PhysicsConstants.particleDefaultMass = 1.0;
 PhysicsConstants.maximalSpringStrength = 0.4;
 PhysicsConstants.minimalSpringStrength = 0.05;
 PhysicsConstants.springDamping = 0.2;

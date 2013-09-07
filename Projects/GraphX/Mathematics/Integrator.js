@@ -127,8 +127,8 @@ Integrator.prototype = {
                 this.originalPositions[i].set(p.position);
                 this.originalVelocities[i].set(p.velocity);
             }
-        console.log("Degub 1");
-        console.log(p.position);
+        //console.log("Degub 1");
+        //console.log(p.position);
 
             // Anyway, re-initialise forces applied to it
              p.force.clear();

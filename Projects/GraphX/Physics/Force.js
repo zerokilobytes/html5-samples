@@ -31,7 +31,7 @@ Force.prototype = {
         return this.end2;
     },
     isDisposed: function() {
-        return this.isDisposed || this.end1.isDisposed() || this.end2.isDisposed();
+        return this.isDisposed; //|| this.end1.isDisposed() || this.end2.isDisposed();
     },
     dispose: function() {
         this.isDisposed = true;

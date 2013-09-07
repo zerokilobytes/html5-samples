@@ -65,6 +65,7 @@ ParticleSystem.prototype = {
     makeAttraction: function(end1, end2, k, d) {
         var m = new Attraction(end1, end2, k, d);
         this.attractions.push(m);
+        console.log(m);
         return m;
     },
     clear: function() {

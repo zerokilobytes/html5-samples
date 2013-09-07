@@ -36,15 +36,17 @@ PhysicsManager.prototype = {
                 var repulsion = this.particleSystem.makeAttraction( model.nodeList[i].physicRepresentation, particle, -1 * this.settings.repultionForce, PhysicsConstants.attractionEffectMinimalDistance);
                 node.setRepulsion( model.nodeList[i], repulsion);
                  model.nodeList[i].setRepulsion(node, repulsion);
+                 console.log(this.settings.repultionForce);
             }
         }
         node.physicRepresentation = particle;
     },
     addEdgePhysicRepresentation: function(link)
     {
-        console.log(">>> ");
+      
         // if the link physic representation already exists then don't do anything
-        if (link.physicRepresentation !== null) {
+        if (link.physicRepresentation != null) {
+             console.log("-------------");
             // we update the strength of the physics representation
             link.physicRepresentation.strength = this.getSpringStrength(link);
             return;
@@ -59,7 +61,7 @@ PhysicsManager.prototype = {
         link.physicRepresentation = this.particleSystem.makeSpring(link.relatedNode1.physicRepresentation, link.relatedNode2.physicRepresentation, springStrength, PhysicsConstants.springDamping, this.settings.linkRestLength);
 
         // delete useless repulsion
-        //TO: DO :::::: link.relatedNode1.getRepulsion(link.relatedNode2).dispose();
+        link.relatedNode1.getRepulsion(link.relatedNode2).dispose();
     },
     start: function() {
         // initialising the update timer
@@ -78,6 +80,7 @@ PhysicsManager.prototype = {
         this.particleSystem.tick(time);
     },
     getSpringStrength: function(link) {
+console.log(">>>>>>>>> getSpringStrength");
         var springStrength;
         springStrength = link.strength / 100;
         springStrength *= PhysicsConstants.maximalSpringStrength - PhysicsConstants.minimalSpringStrength;

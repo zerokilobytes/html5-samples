@@ -53,7 +53,7 @@ GraphManager.prototype = {
         this.graph.draw();
     },
     update: function() {
-        this.graph.update();
+        this.graph.update(this);
     },
     createNode: function(title, type) {
         var node = new Node();
@@ -70,11 +70,13 @@ GraphManager.prototype = {
     },
     createEdge: function(text, nodeFrom, nodeTo) {
         var link = new Edge(text, nodeFrom, nodeTo);
-        this.linkList.push(link);
+        
 
-        link.strength = 50;
+        link.strength = 0.25;
         link.styleName = "";
         link.verb = text;
+        
+        this.linkList.push(link);
         return link;
     },
     increaseDepth: function() {

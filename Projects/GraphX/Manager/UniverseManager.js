@@ -47,8 +47,8 @@ UniverseManager.prototype = {
     createNode: function(title, type) {
         var node = this.graphManager.createNode(title, type);
         node.guid = NumberFunc.getRandomInt(1, NumberFunc.MAX_VALUE);
-        var x = NumberFunc.getRandomArbitrary(1,100);
-        var y = NumberFunc.getRandomArbitrary(1,100);
+        var x = NumberFunc.getRandomArbitrary(1,600);
+        var y = NumberFunc.getRandomArbitrary(1,600);
         var z = 0;
 
         // set the physic representation of our link
@@ -68,7 +68,7 @@ UniverseManager.prototype = {
 
         // create the link in the physics engine
         this.physicsManager.addEdgePhysicRepresentation(link);
-console.log(">>> ");
+
         // create link in the graph
         //this.viewManager.setViewToLink(link);
         console.log(link);

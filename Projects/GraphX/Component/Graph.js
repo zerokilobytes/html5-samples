@@ -39,8 +39,13 @@ Graph.prototype = {
             }
         }
     },
-    update: function() {
-        this.move();
+    update: function(manager) {
+        //this.move();
+        var node;
+        for (var i = 0; i < this.nodes.length; i++) {
+            node = this.nodes[i];
+            node.update();
+        }
     },
     springTo: function(nodeA, nodeB) {
         var dx = nodeB.getX() - nodeA.getX();

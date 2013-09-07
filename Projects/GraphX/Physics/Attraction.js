@@ -1,11 +1,14 @@
-var Attraction = function() {
+var Attraction = function(end1, end2, k, d) {
     this.strength = 0.0;
     this.minDist = 0.0;
+
+    this.init(end1, end2, k, d);
 };
 
 Attraction.prototype = {
     init: function(end1, end2, k, d)
     {
+        console.log(arguments);
         Force.prototype.init.call(this);
 
         this.strength = k;
@@ -27,6 +30,8 @@ Attraction.prototype = {
             var oneOverDist = Arithmetic.fastInverseSqrt((distX * distX) + (distY * distY) + (distZ * distZ));
             var dist = 1.0 / oneOverDist;
 
+
+
             // Distance calculation is fast but not very precise, so : 
             if (dist !== 0.0) {
 
@@ -36,6 +41,7 @@ Attraction.prototype = {
 
                 // First part of the calculation for the attraction force
                 var force = this.strength;
+
 
                 // If distance is smaller thant set minum,
                 if (dist < this.minDist) {
@@ -53,13 +59,16 @@ Attraction.prototype = {
                 distZ *= force;
 
                 // Add the a new force to both ends
-                end1.Force.add(new Vector3D(-distX, -distY, -distZ));
-                end2.Force.add(new Vector3D(distX, distY, distZ));
+                this.end1.force.add(new Vector3D(-distX, -distY, -distZ));
+                this.end2.force.add(new Vector3D(distX, distY, distZ));
             }
 
         }
     },
+    dispose: function() {
+        return Force.prototype.dispose.call(this);
+    },
     isDisposed: function() {
-
+        return Force.prototype.isDisposed.call(this);
     }
 };

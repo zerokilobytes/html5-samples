@@ -45,7 +45,7 @@ var Edge = function(id, node1, node2) {
     /// <summary>
     /// Define whether the node is visible on the graph
     /// </summary>
-    this.isVisible = false;
+    this.isVisible = true;
 
     /// <summary>
     /// Define whether the model manager explored this node during the exploration process.
@@ -77,7 +77,7 @@ var Edge = function(id, node1, node2) {
 
     this.drawingInformation = "";
 
-    isDisposed = false;
+    this.isDisposed = false;
 
     this.isExplored = false;
 
@@ -86,22 +86,7 @@ var Edge = function(id, node1, node2) {
     this.id = "";
 
 
-    this.relatedNode1 = null;
-
-    /// <summary>
-    /// Gets second node relative to the link
-    /// </summary>
-    this.relatedNode2 = null;
-
-    /// <summary>
-    /// Gets or sets the strength of the link
-    /// </summary>
-    /// <remarks>Strength is a percentage, values must be between 1 and 100</remarks>
-    this.strength = 0.0;
-
-    /// <summary>
-    /// Gets or sets the links's style
-    /// </summary>
+    
     this.styleName = "";
 
     /// <summary>

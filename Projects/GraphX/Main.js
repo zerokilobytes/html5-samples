@@ -20,7 +20,7 @@ window.requestAnimFrame = (function(callback)
 {
     return function(callback)
             {
-                window.setTimeout(callback, 1500);
+                window.setTimeout(callback, 1000/60);
             };
 })();
 

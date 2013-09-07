@@ -83,7 +83,10 @@ Spring.prototype = {
             }
         }
     },
+    dispose: function() {
+        return Force.prototype.dispose.call(this);
+    },
     isDisposed: function() {
-
+        return Force.prototype.isDisposed.call(this);
     }
 };

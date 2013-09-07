@@ -24,7 +24,7 @@ var Node = function(property) {
     this.relativeSize = 1;
     this.guid = 0;
     this.isDisposed = false;
-    this.sUpToDate;
+    this.isUpToDate;
     //EventHandler GUIDataChanged;
     //EventHandler SelectionChanged;
 
@@ -72,28 +72,27 @@ Node.prototype = {
     },
     setRepulsion: function(node, repulsion)
     {
-    	console.log(this.repulsionsList);
         // if there already was a repulsion force between the two nodes,
         // we need to turn it off.
         if (this.repulsionsList.get(node) !== undefined) {
-             console.log("setRepulsion ");
-        //console.log(this.repulsionsList.get(node));
-            this.repulsionsList[node].dispose();
+            console.log("setRepulsion()2");
+            //console.log(this.repulsionsList.get(node));
+            this.repulsionsList.get(node).dispose();
         }
 
         // sets the repulsion force
         // (as repulsionList is a dictionnary, the entry will be added if it doesn't already exist)
-        this.repulsionsList[node] = repulsion;
-        
-        console.log(this.repulsionsList[node]);
+        this.repulsionsList.put(node, repulsion);
+        console.log("setRepulsion()4");
+        console.log(this.repulsionsList);
     },
     getRepulsion: function(node) {
         // the method is not protected because
         // we assume here that there will always be an entry for the node
         // (as all nodes repulse each other)
-         console.log("List <<<<<<");
-        console.log(this.repulsionsList);
-        return this.repulsionsList[node];
+        console.log("List <<<<<<");
+        console.log(this.repulsionsList.get(node));
+        return this.repulsionsList.get(node);
     },
     setRelativeMass: function() {
         this.physicRepresentation.mass = PhysicsConstants.particleDefaultMass + Math.log(PhysicsConstants.particleDefaultMass * this.linkList.length);
@@ -124,7 +123,7 @@ Node.prototype = {
         this.vy = vy;
         return this;
     },
-    setPosition: function(x, y) {
+    setPosition: function(x, y, z) {
         this.content.setPosition(x, y);
         return this;
     },
@@ -138,7 +137,10 @@ Node.prototype = {
         return this.content;
     },
     update: function() {
-        this.content.setPosition(this.content.getPosition().x, this.content.getPosition().y);
-        return this;
+        var position = this.physicRepresentation.position;
+        console.log(position);
+        this.content.setPosition(position.x, position.y);
+        //this.content.setPosition(this.content.getPosition().x, this.content.getPosition().y);
+        //return this;
     }
 };
