@@ -24,30 +24,25 @@ PhysicsManager.prototype = {
 
         // else we create a physic representation
         var particle = this.particleSystem.makeParticle(x, y, z);
-       
-        
+
+
         //var otherNode
         //console.log(particle);
         // create some space between the nodes 
         for (var i = 0; i < model.nodeList.length; i++) {
-           
-            if ( model.nodeList[i].physicRepresentation !== null) {
-              
-                var repulsion = this.particleSystem.makeAttraction( model.nodeList[i].physicRepresentation, particle, -1 * this.settings.repultionForce, PhysicsConstants.attractionEffectMinimalDistance);
-                node.setRepulsion( model.nodeList[i], repulsion);
-                 model.nodeList[i].setRepulsion(node, repulsion);
-                 console.log(this.settings.repultionForce);
+            var otherNode = model.nodeList[i];
+            if (otherNode.physicRepresentation !== null) {
+
+                var repulsion = this.particleSystem.makeAttraction(otherNode.physicRepresentation, particle, -1 * this.settings.repultionForce, PhysicsConstants.attractionEffectMinimalDistance);
+                node.setRepulsion(otherNode, repulsion);
+                otherNode.setRepulsion(node, repulsion);
             }
         }
         node.physicRepresentation = particle;
     },
     addEdgePhysicRepresentation: function(link)
     {
-      
-        // if the link physic representation already exists then don't do anything
-        if (link.physicRepresentation != null) {
-             console.log("-------------");
-            // we update the strength of the physics representation
+        if (link.physicRepresentation !== null) {
             link.physicRepresentation.strength = this.getSpringStrength(link);
             return;
         }
@@ -55,13 +50,12 @@ PhysicsManager.prototype = {
         // else we calculate the spring strength
         var springStrength = this.getSpringStrength(link);
 
-        console.log(">>>>>>>>> " + springStrength);
-
         // create the physic representation
         link.physicRepresentation = this.particleSystem.makeSpring(link.relatedNode1.physicRepresentation, link.relatedNode2.physicRepresentation, springStrength, PhysicsConstants.springDamping, this.settings.linkRestLength);
 
         // delete useless repulsion
-        link.relatedNode1.getRepulsion(link.relatedNode2).dispose();
+        var attraction = link.relatedNode2.getRepulsion(link.relatedNode1);
+        attraction.dispose();
     },
     start: function() {
         // initialising the update timer
@@ -74,18 +68,32 @@ PhysicsManager.prototype = {
         this.timer.start();
     },
     settings_Changed: function(e) {
+         // Set gravity as defined in user settings
+           // this.particleSystem.setGravity(this.settings.gravity);
 
+            // Set drag force
+            this.particleSystem.setDrag(this.settings.dragForce);
+return;
+            // change spring length at rest
+            for (var spring in this.particleSystem.getSprings())
+            {
+                spring.restLength = this.settings.linkRestLength;
+            }
+
+            // change repulsion strength
+            for(var repultion in this.particleSystem.getAttractions())
+            {
+                repultion.strength = -1 * this.settings.repultionForce;
+            }
     },
     update: function(time) {
         this.particleSystem.tick(time);
     },
     getSpringStrength: function(link) {
-console.log(">>>>>>>>> getSpringStrength");
         var springStrength;
         springStrength = link.strength / 100;
         springStrength *= PhysicsConstants.maximalSpringStrength - PhysicsConstants.minimalSpringStrength;
         springStrength += PhysicsConstants.minimalSpringStrength;
-        console.log(springStrength);
         return springStrength;
     }
 };

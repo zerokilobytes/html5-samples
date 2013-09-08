@@ -75,23 +75,16 @@ Node.prototype = {
         // if there already was a repulsion force between the two nodes,
         // we need to turn it off.
         if (this.repulsionsList.get(node) !== undefined) {
-            console.log("setRepulsion()2");
-            //console.log(this.repulsionsList.get(node));
+             console.log("repulsion exists");
+            console.log(repulsion);
             this.repulsionsList.get(node).dispose();
         }
 
         // sets the repulsion force
         // (as repulsionList is a dictionnary, the entry will be added if it doesn't already exist)
         this.repulsionsList.put(node, repulsion);
-        console.log("setRepulsion()4");
-        console.log(this.repulsionsList);
     },
     getRepulsion: function(node) {
-        // the method is not protected because
-        // we assume here that there will always be an entry for the node
-        // (as all nodes repulse each other)
-        console.log("List <<<<<<");
-        console.log(this.repulsionsList.get(node));
         return this.repulsionsList.get(node);
     },
     setRelativeMass: function() {
@@ -138,7 +131,7 @@ Node.prototype = {
     },
     update: function() {
         var position = this.physicRepresentation.position;
-        console.log(position);
+        //console.log(position);
         this.content.setPosition(position.x, position.y);
         //this.content.setPosition(this.content.getPosition().x, this.content.getPosition().y);
         //return this;

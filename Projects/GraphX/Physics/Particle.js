@@ -8,6 +8,7 @@ var Particle = function(mass, position) {
     this.velocity = null;
     this.force = null;
 
+    this.guid;
     this.init(mass, position);
 };
 
@@ -21,6 +22,8 @@ Particle.prototype = {
         this.isDisposedOf = false;
         this.velocity = new Vector3D(0.0, 0.0, 0.0);
         this.force = new Vector3D(0.0, 0.0, 0.0);
+
+        this.guid = NumberFunc.getRandomInt(1, NumberFunc.MAX_VALUE);
     },
     moveTo: function(vector) {
         this.position.set(vector);

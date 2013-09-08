@@ -1,7 +1,7 @@
 var Force = function() {
     this.end1 = null;
     this.end2 = null;
-    this.isDisposed = false;
+    this.isDisposedOf = false;
     this.isEnable = false;
 };
 
@@ -10,7 +10,7 @@ Force.prototype = {
         this.end1 = null;
         this.end2 = null;
         this.isEnable = true;
-        this.isDisposed = false;
+        this.isDisposedOf = false;
     },
     turnOff: function() {
         this.isEnable = false;
@@ -19,10 +19,10 @@ Force.prototype = {
         this.isEnable = true;
     },
     isOn: function() {
-        return this.isEnable && this.end1.isEnable && this.end2.isEnable;
+        return this.isEnable;// && this.end1.isEnable && this.end2.isEnable;
     },
     isOff: function() {
-        return !(this.isEnable && this.end1.IsEnable && this.end2.IsEnable);
+        return !(this.isEnable);// && this.end1.IsEnable && this.end2.IsEnable);
     },
     getOneEnd: function() {
         return this.end1;
@@ -31,10 +31,10 @@ Force.prototype = {
         return this.end2;
     },
     isDisposed: function() {
-        return this.isDisposed; //|| this.end1.isDisposed() || this.end2.isDisposed();
+        return this.isDisposedOf; //|| this.end1.isDisposed() || this.end2.isDisposed();
     },
     dispose: function() {
-        this.isDisposed = true;
+        this.isDisposedOf = true;
     },
     apply: function() {
     }

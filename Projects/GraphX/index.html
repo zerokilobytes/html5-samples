@@ -47,8 +47,12 @@
                 
                 universe.createEdge("", node1, node2);
                 universe.createEdge("", node1, node3);
+                universe.createEdge("", node2, node3);
                 
                 //console.log(node1.physicRepresentation.isFree());
+                //node1.physicRepresentation.makeFixed();
+                
+                universe.physicsManager.settings_Changed();
             }
         </script>
     </head>

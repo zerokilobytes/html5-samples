@@ -124,12 +124,12 @@ Edge.prototype = {
      * Gets the second node at end of the link
      */
     getTheOppositeNode: function(node) {
-        if (node === this.relatedNode1)
+        if (node == this.relatedNode1)
         {
             return this.relatedNode2;
         }
 
-        if (node === this.relatedNode2)
+        if (node == this.relatedNode2)
         {
             return this.relatedNode1;
         }

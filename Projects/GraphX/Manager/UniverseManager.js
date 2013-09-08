@@ -43,6 +43,8 @@ UniverseManager.prototype = {
         this.graphManager.start();
         this.physicsManager.start();
         this.canvasManager.start();
+        
+        
     },
     createNode: function(title, type) {
         var node = this.graphManager.createNode(title, type);

@@ -1,8 +1,8 @@
 var Settings = function() {
     this.dragForce = 0.25;
-    this.linkRestLength = 5;
+    this.linkRestLength = 100;
     this.gravity = 0.0;
-    this.repultionForce = 50;
+    this.repultionForce = 1000;
     this.linkMaximalThickness = 8;
     this.linkMinimalThickness = 0.5;
     this.nodeSizeRatio = 0.25;

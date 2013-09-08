@@ -27,13 +27,13 @@ ParticleSystem.prototype = {
     setDrag: function(d) {
         this.drag = d;
     },
-   /* tick: function() {
+    /* tick: function() {
+     this.cleanUp();
+     this.integrator.step(1.0);
+     },*/
+    tick: function(t) {
         this.cleanUp();
         this.integrator.step(1.0);
-    },*/
-    tick: function(t) {
-        //this.cleanUp();
-        this.integrator.step(t);
     },
     makeParticle2: function(mass, x, y, z) {
         var p = new Particle(mass, new Vector3D(x, y, z));
@@ -43,15 +43,8 @@ ParticleSystem.prototype = {
     },
     makeParticle: function(x, y, z) {
         var p = new Particle(PhysicsConstants.particleDefaultMass, new Vector3D(x, y, z));
-      
-       
         this.particles.push(p);
-        
-        
-        
         this.integrator.allocateParticles();
-        
-         
         return p;
     },
     makeParticle3: function() {
@@ -65,7 +58,6 @@ ParticleSystem.prototype = {
     makeAttraction: function(end1, end2, k, d) {
         var m = new Attraction(end1, end2, k, d);
         this.attractions.push(m);
-        console.log(m);
         return m;
     },
     clear: function() {
@@ -81,8 +73,8 @@ ParticleSystem.prototype = {
             p.force.add(this.gravity);
 
             p.force.add(new Vector3D(p.velocity.x * -this.drag, p.velocity.y * -this.drag, p.velocity.z * -this.drag));
-            
-           
+
+            //console.log(new Vector3D(p.velocity.x * -this.drag, p.velocity.y * -this.drag, p.velocity.z * -this.drag));
         }
 
         var s;
@@ -118,6 +110,10 @@ ParticleSystem.prototype = {
     {
         return this.springs[i];
     },
+    getSprings: function()
+    {
+        return this.springs;
+    },
     setSprings: function()
     {
         return this.springs;
@@ -143,16 +139,20 @@ ParticleSystem.prototype = {
             var p = this.particles[i];
             if (p.isDisposed())
             {
+                console.log("p");
+                console.log(p);
                 this.particles.splice(i--, 1);
             }
         }
 
         for (var i = 0; i < this.springs.length; i++) {
             var s = this.springs[i];
-            console.log(s);
+
             if (s.isDisposed())
             {
                 this.springs.splice(i--, 1);
+                console.log("s");
+                console.log(s);
             }
         }
 
@@ -160,7 +160,7 @@ ParticleSystem.prototype = {
             var a = this.attractions[i];
             if (a.isDisposed())
             {
-                this.attractions.splice(i--, 1);
+                var o = this.attractions.splice(i--, 1);
             }
         }
     }

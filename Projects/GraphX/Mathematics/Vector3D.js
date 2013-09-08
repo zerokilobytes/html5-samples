@@ -76,10 +76,9 @@ Vector3D.prototype = {
         this.z -= p.z;
         return this;
     },
-
-	/**
-	 *  Calculate the resultant of two vectors
-	 */
+    /**
+     *  Calculate the resultant of two vectors
+     */
     plus: function(p) {
         return new Vector3D(this.x + p.x, this.y + p.y, this.z + p.z);
     },

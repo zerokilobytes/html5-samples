@@ -8,7 +8,6 @@ var Attraction = function(end1, end2, k, d) {
 Attraction.prototype = {
     init: function(end1, end2, k, d)
     {
-        console.log(arguments);
         Force.prototype.init.call(this);
 
         this.strength = k;
@@ -46,7 +45,7 @@ Attraction.prototype = {
                 // If distance is smaller thant set minum,
                 if (dist < this.minDist) {
                     // limit the strength of attraction force
-                    force /= this.minDist * this.minDist;
+                    force /= (this.minDist * this.minDist);
                 }
                 else {
                     // else, apply usual formula
