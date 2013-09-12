@@ -23,6 +23,7 @@ var Edge = function(id, node1, node2) {
     this.verb = "";
     this.complement = "";
     this.physicRepresentation = null;
+    this.content = null;
 
     this.init(id, node1, node2);
 };
@@ -36,6 +37,28 @@ Edge.prototype = {
         this.relatedNode2 = node2;
         this.relatedNode2.linkList.push(this);
         this.relatedNode2.setRelativeMass();
+
+        this.content = new Kinetic.Line({
+            x: 0,
+            y: 0,
+            points: [0, 0, 100, 100],
+            stroke: 'blue',
+            strokeWidth: 2,
+            lineCap: 'round',
+            lineJoin: 'round',
+            dashArray: [30, 10, 0.001, 10]
+        });
+
+        //this.content.setPoints(73, 73, 500, 73);
+    },
+    update: function() {
+        var p1 = this.relatedNode1.physicRepresentation.position;
+        var p2 = this.relatedNode2.physicRepresentation.position;
+
+        this.content.getPoints()[0].x = p1.x;
+        this.content.getPoints()[0].y = p1.y;
+        this.content.getPoints()[1].x = p2.x;
+        this.content.getPoints()[1].y = p2.y;
     },
     GUIDataChanged: function() {
 

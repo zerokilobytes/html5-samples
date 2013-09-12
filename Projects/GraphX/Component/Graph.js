@@ -5,6 +5,7 @@
 var Graph = function() {
     this.layer = null;
     this.nodes = [];
+    this.edges = [];
     this.spring = 0.05;
     this.friction = 0.95;
     this.springLength = 300;
@@ -24,6 +25,15 @@ Graph.prototype = {
         this.nodes.push(node);
         this.layer.add(node.content);
     },
+    /**
+     * 
+     * @param {Edge} edge
+     * @returns {void}
+     */
+    addEdge: function(edge) {
+        this.edges.push(edge);
+        this.layer.add(edge.content);
+    },
     getLayer: function() {
         return this.layer;
     },
@@ -39,9 +49,13 @@ Graph.prototype = {
             }
         }
     },
-    update: function(manager) {
+    update: function() {
         //this.move();
-        var node;
+        for (var i = 0; i < this.edges.length; i++) {
+            edge = this.edges[i];
+            edge.update();
+        }
+
         for (var i = 0; i < this.nodes.length; i++) {
             node = this.nodes[i];
             node.update();

@@ -52,8 +52,7 @@ UniverseManager.prototype = {
 
         return node;
     },
-    createEdge: function(text, nodeFrom, nodeTo)
-    {
+    createEdge: function(text, nodeFrom, nodeTo){
         var link = null;
 
         // link creation

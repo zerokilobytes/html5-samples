@@ -77,6 +77,7 @@ GraphManager.prototype = {
         link.verb = text;
 
         this.linkList.push(link);
+        this.graph.addEdge(link);
         return link;
     },
     increaseDepth: function() {

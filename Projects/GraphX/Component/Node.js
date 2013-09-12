@@ -57,9 +57,15 @@ Node.prototype = {
             that.physicRepresentation.makeFree();
             console.log("dragend");
         });
-
         this.content.on('dragmove', function(e) {
             that.dragTo(new Vector3D(e.x, e.y, 0));
+        });
+        this.content.on('mouseover', function() {
+            document.body.style.cursor = 'pointer';
+        });
+        this.content.on('mouseout', function() {
+            document.body.style.cursor = 'default';
+
         });
     },
     dispose: function() {
@@ -146,7 +152,6 @@ Node.prototype = {
         return this.content;
     },
     dragTo: function(position) {
-        console.log(position);
         this.physicRepresentation.position.set(position);
     },
     update: function() {
