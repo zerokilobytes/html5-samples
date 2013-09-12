@@ -6,8 +6,7 @@ var Attraction = function(end1, end2, k, d) {
 };
 
 Attraction.prototype = {
-    init: function(end1, end2, k, d)
-    {
+    init: function(end1, end2, k, d){
         Force.prototype.init.call(this);
 
         this.strength = k;

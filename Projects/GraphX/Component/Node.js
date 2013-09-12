@@ -25,6 +25,7 @@ var Node = function(property) {
     this.guid = 0;
     this.isDisposed = false;
     this.isUpToDate;
+
     //EventHandler GUIDataChanged;
     //EventHandler SelectionChanged;
 
@@ -45,6 +46,21 @@ Node.prototype = {
 
         this.content.vx = 0;
         this.content.vy = 0;
+
+        var that = this;
+
+        this.content.on('dragstart', function() {
+            that.physicRepresentation.makeFixed();
+            console.log("dragstart");
+        });
+        this.content.on('dragend', function() {
+            that.physicRepresentation.makeFree();
+            console.log("dragend");
+        });
+
+        this.content.on('dragmove', function(e) {
+            that.dragTo(new Vector3D(e.x, e.y, 0));
+        });
     },
     dispose: function() {
         if (this.isDisposable)
@@ -75,7 +91,7 @@ Node.prototype = {
         // if there already was a repulsion force between the two nodes,
         // we need to turn it off.
         if (this.repulsionsList.get(node) !== undefined) {
-             console.log("repulsion exists");
+            console.log("repulsion exists");
             console.log(repulsion);
             this.repulsionsList.get(node).dispose();
         }
@@ -129,11 +145,14 @@ Node.prototype = {
     getContent: function() {
         return this.content;
     },
+    dragTo: function(position) {
+        console.log(position);
+        this.physicRepresentation.position.set(position);
+    },
     update: function() {
-        var position = this.physicRepresentation.position;
-        //console.log(position);
-        this.content.setPosition(position.x, position.y);
-        //this.content.setPosition(this.content.getPosition().x, this.content.getPosition().y);
-        //return this;
+        if (!this.isDragging()) {
+            var position = this.physicRepresentation.position;
+            this.content.setPosition(position.x, position.y);
+        }
     }
 };

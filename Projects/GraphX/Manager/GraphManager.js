@@ -62,20 +62,20 @@ GraphManager.prototype = {
         node.typeName = type;
         node.title = title;
         node.url = "";
-        
+
         this.nodeList.push(node);
         this.graph.addNode(node);
-        
+
         return node;
     },
     createEdge: function(text, nodeFrom, nodeTo) {
         var link = new Edge(text, nodeFrom, nodeTo);
-        
+
 
         link.strength = 0.10;
         link.styleName = "";
         link.verb = text;
-        
+
         this.linkList.push(link);
         return link;
     },

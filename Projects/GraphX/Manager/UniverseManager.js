@@ -15,19 +15,10 @@ var UniverseManager = function() {
 };
 
 UniverseManager.prototype = {
-    init: function()
-    {
-        // creating the model
+    init: function() {
         this.graphManager = new GraphManager();
-        // creating the view from model and style
         this.initializeViewManager();
-
         this.canvasManager = new CanvasManager();
-
-        // creating the random engine
-        //this.random = new Random(new Date());
-
-        // creating the physic system
         this.physicsManager = new PhysicsManager(this);
 
         // creating the key manager

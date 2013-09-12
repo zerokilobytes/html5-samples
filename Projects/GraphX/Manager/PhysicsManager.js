@@ -68,23 +68,23 @@ PhysicsManager.prototype = {
         this.timer.start();
     },
     settings_Changed: function(e) {
-         // Set gravity as defined in user settings
-           // this.particleSystem.setGravity(this.settings.gravity);
+        // Set gravity as defined in user settings
+        // this.particleSystem.setGravity(this.settings.gravity);
 
-            // Set drag force
-            this.particleSystem.setDrag(this.settings.dragForce);
-return;
-            // change spring length at rest
-            for (var spring in this.particleSystem.getSprings())
-            {
-                spring.restLength = this.settings.linkRestLength;
-            }
+        // Set drag force
+        this.particleSystem.setDrag(this.settings.dragForce);
+        return;
+        // change spring length at rest
+        for (var spring in this.particleSystem.getSprings())
+        {
+            spring.restLength = this.settings.linkRestLength;
+        }
 
-            // change repulsion strength
-            for(var repultion in this.particleSystem.getAttractions())
-            {
-                repultion.strength = -1 * this.settings.repultionForce;
-            }
+        // change repulsion strength
+        for (var repultion in this.particleSystem.getAttractions())
+        {
+            repultion.strength = -1 * this.settings.repultionForce;
+        }
     },
     update: function(time) {
         this.particleSystem.tick(time);

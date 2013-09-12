@@ -1,109 +1,29 @@
 var Edge = function(id, node1, node2) {
-    /// <summary>
-    /// The link's ID
-    /// </summary>
     this.id;
-
-    /// <summary>
-    /// First node relative to the link
-    /// </summary>
     this.relatedNode1;
-
-    /// <summary>
-    /// Second node relative to the link
-    /// </summary>
     this.relatedNode2;
-
-    /// <summary>
-    /// Strength of the link
-    /// </summary>
-    /// <remarks>Strength is a percentage, are between 1 and 100</remarks>
     this.strength = 0.0;
-
-    /// <summary>
-    /// Links's style
-    /// </summary>
     this.styleName = 0;
-
-    /// <summary>
-    /// Verb used in the link description
-    /// </summary>
     this.verb = "";
-
-    /// <summary>
-    /// Complement used in the link description
-    /// </summary>
     this.complement = "";
-
-    /// <summary>
-    /// Link's physical representation
-    /// </summary>
-    /// TODO : move away ?
-    //Spring type
     this.physicRepresentation = new Spring();
-
-    /// <summary>
-    /// Define whether the node is visible on the graph
-    /// </summary>
     this.isVisible = true;
-
-    /// <summary>
-    /// Define whether the model manager explored this node during the exploration process.
-    /// </summary>
-    /// <remarks>
-    /// this field is set to false after the initialiation of the exploration process.
-    /// </remarks>
     this.isExplored = false;
-
-    /// <summary>
-    /// Define whether the link has been diposed or not
-    /// </summary>
     this.isDisposed = false;
-
-    /// <summary>
-    /// This is the list of all actions the user can perform on the link and there respectives arguments
-    /// Each action is represented in XML (@see the ICE Data file)
-    /// </summary>
     this.actions = [];
-
-    /// <summary>
-    /// This is the Xml definition of all useful information used to draw the link on the graph
-    /// </summary>
     this.drawingInformation = "";
-
     this.actions = [];
-
     this.typeName = "";
-
     this.drawingInformation = "";
-
     this.isDisposed = false;
-
     this.isExplored = false;
-
     this.isVisible = false;
-
     this.id = "";
-
-
-    
     this.styleName = "";
-
-    /// <summary>
-    /// Gets or sets the verb used in the link description
-    /// </summary>
     this.verb = "";
-
-    /// <summary>
-    /// Gets or sets the complement used in the link description
-    /// </summary>
     this.complement = "";
-
-    /// <summary>
-    /// Gets or sets the link's physical representation
-    /// </summary>
     this.physicRepresentation = null;
-    
+
     this.init(id, node1, node2);
 };
 
@@ -124,16 +44,13 @@ Edge.prototype = {
      * Gets the second node at end of the link
      */
     getTheOppositeNode: function(node) {
-        if (node == this.relatedNode1)
-        {
+        if (node === this.relatedNode1) {
             return this.relatedNode2;
         }
 
-        if (node == this.relatedNode2)
-        {
+        if (node === this.relatedNode2) {
             return this.relatedNode1;
         }
-
         return null;
     },
     /**
