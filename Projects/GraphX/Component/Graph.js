@@ -51,14 +51,15 @@ Graph.prototype = {
     },
     update: function() {
         //this.move();
-        for (var i = 0; i < this.edges.length; i++) {
-            edge = this.edges[i];
-            edge.update();
-        }
-
         for (var i = 0; i < this.nodes.length; i++) {
             node = this.nodes[i];
             node.update();
+            node.content.setZIndex(10);
+        }
+        
+        for (var i = 0; i < this.edges.length; i++) {
+            edge = this.edges[i];
+            edge.update();
         }
     },
     springTo: function(nodeA, nodeB) {

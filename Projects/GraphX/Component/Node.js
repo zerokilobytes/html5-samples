@@ -37,7 +37,7 @@ Node.prototype = {
         this.content = new Kinetic.Circle({
             x: this.property.x,
             y: this.property.y,
-            radius: 30,
+            radius: 20,
             fill: 'red',
             stroke: 'gray',
             strokeWidth: 1,

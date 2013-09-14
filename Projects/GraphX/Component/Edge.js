@@ -42,7 +42,7 @@ Edge.prototype = {
             x: 0,
             y: 0,
             points: [0, 0, 100, 100],
-            stroke: 'blue',
+            stroke: '#8B8B83',
             strokeWidth: 2,
             lineCap: 'round',
             lineJoin: 'round',
