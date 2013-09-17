@@ -25,6 +25,15 @@ Graph.prototype = {
         this.nodes.push(node);
         this.layer.add(node.content);
     },
+    getNode: function(id) {
+        for (var i = 0; i < this.nodes.length; i++) {
+            var node = this.nodes[i];
+           
+            if(node.id === id){
+                return node;
+            }
+        }
+    },
     /**
      * 
      * @param {Edge} edge
@@ -56,10 +65,10 @@ Graph.prototype = {
             node.content.setZIndex(10);
             node.update();
         }
-        
+
         for (var i = 0; i < this.edges.length; i++) {
             edge = this.edges[i];
-            edge.content.setZIndex(1);
+            edge.content.setZIndex(0);
             edge.update();
         }
     },

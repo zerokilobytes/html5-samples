@@ -10,7 +10,7 @@ var UniverseManager = function() {
     this.canvasManager;
     this.assemblyManager;
     this.fileDownloadManager;
-    
+
     this.init();
 };
 
@@ -34,14 +34,14 @@ UniverseManager.prototype = {
         this.graphManager.start();
         this.physicsManager.start();
         this.canvasManager.start();
-        
-        
+
+
     },
-    createNode: function(title, type) {
-        var node = this.graphManager.createNode(title, type);
+    createNode: function(id, title, type) {
+        var node = this.graphManager.createNode(id, title, type);
         node.guid = NumberFunc.getRandomInt(1, NumberFunc.MAX_VALUE);
-        var x = NumberFunc.getRandomArbitrary(1,600);
-        var y = NumberFunc.getRandomArbitrary(1,600);
+        var x = NumberFunc.getRandomArbitrary(1, 600);
+        var y = NumberFunc.getRandomArbitrary(1, 600);
         var z = 0;
 
         // set the physic representation of our link
@@ -52,24 +52,28 @@ UniverseManager.prototype = {
 
         return node;
     },
-    createEdge: function(text, nodeFrom, nodeTo){
+    createEdge: function(text, nodeFrom, nodeTo) {
         var link = null;
 
+        var node1 = this.getNode(nodeFrom);
+        var node2 = this.getNode(nodeTo);
+
         // link creation
-        link = this.graphManager.createEdge(text, nodeFrom, nodeTo);
+        link = this.graphManager.createEdge(text, node1, node2);
 
         // create the link in the physics engine
         this.physicsManager.addEdgePhysicRepresentation(link);
 
         // create link in the graph
         //this.viewManager.setViewToLink(link);
-        console.log(link);
         return link;
     },
     initializeViewManager: function() {
 
     },
-    
+    getNode: function(id) {
+        return this.graphManager.getNode(id);
+    },
     draw: function() {
         this.graphManager.draw();
     },

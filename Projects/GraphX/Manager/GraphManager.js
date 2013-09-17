@@ -55,18 +55,22 @@ GraphManager.prototype = {
     update: function() {
         this.graph.update(this);
     },
-    createNode: function(title, type) {
+    createNode: function(id, title, type) {
         var node = new Node();
 
         node.styleName = "";
         node.typeName = type;
         node.title = title;
         node.url = "";
+        node.id = id;
 
         this.nodeList.push(node);
         this.graph.addNode(node);
 
         return node;
+    },
+    getNode: function(id) {
+        return this.graph.getNode(id);
     },
     createEdge: function(text, nodeFrom, nodeTo) {
         var link = new Edge(text, nodeFrom, nodeTo);

@@ -15,17 +15,13 @@ window.onload = function() {
 
 function init() {
     universe = new UniverseManager();
-    var node1 = universe.createNode("", "");
-    var node2 = universe.createNode("", "");
-    var node3 = universe.createNode("", "");
-
-    var node4 = universe.createNode("", "");
-    //node1.physicRepresentation.makeFixed();
-
-    universe.createEdge("", node1, node2);
-    universe.createEdge("", node1, node3);
-    universe.createEdge("", node2, node3);
-    universe.createEdge("", node1, node4);
-
+    GraphLoader.readXML("sample.graphml", createNode, createEdge);
     universe.physicsManager.settings_Changed();
+}
+
+function createNode(element) {
+    universe.createNode(element.id, "");
+}
+function createEdge(element) {
+    universe.createEdge("", element.source, element.target);
 }

@@ -1,5 +1,4 @@
 var Browser = function() {
-
 };
 
 Browser.prototype = {
