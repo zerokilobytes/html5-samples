@@ -294,13 +294,11 @@ Integrator.prototype = {
         for (var i = 0; i < this.sys.numberOfParticles(); i++) {
             p = this.sys.getParticle(i);
 
-            if (!p.isEnable)
-            {
+            if (!p.isEnable){
                 continue;
             }
 
-            if (p.isFree())
-            {
+            if (p.isFree()){
                 result = this.k1Velocities[i];
                 result = result.plus(this.k2Velocities[i].times(2.0));
                 result = result.plus(this.k3Velocities[i].times(2.0));
@@ -319,8 +317,6 @@ Integrator.prototype = {
                 result = result.multiplyBy(deltaT / (6 * p.mass));
                 result = result.add(this.originalVelocities[i]);
                 p.velocity.set(result);
-
-
             }
             p.age += deltaT;
         }

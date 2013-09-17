@@ -16,15 +16,21 @@ GraphLoader.readXML = function(url, nodeCallback, edgeCallback) {
     });
 };
 
-GraphLoader.loadGraph = function(xml, nodeCallback, edgeCallback) {
+GraphLoader.loadGraph = function(xml, nodeCallback, edgeCallback, context) {
     $(xml).find('graphml').find('graph').each(function() {
         $(this).find('node').each(function() {
             var id = $(this).attr('id');
             var data = $(this).find('data').text();
-            nodeCallback({
+
+            var node = {
                 id: id,
-                data: data}
-            );
+                data: data};
+
+            if (typeof edgeCallback === "function") {
+                nodeCallback(node);
+            } else {
+                nodeCallback.call(context, node);
+            }
         });
 
         $(this).find('edge').each(function() {
@@ -32,12 +38,20 @@ GraphLoader.loadGraph = function(xml, nodeCallback, edgeCallback) {
             var source = $(this).attr('source');
             var target = $(this).attr('target');
             var data = $(this).find('data').text();
-            edgeCallback({
+
+            var edge = {
                 id: id,
                 source: source,
                 target: target,
                 data: data
-            });
+            };
+
+            if (typeof edgeCallback === "function") {
+                edgeCallback(edge);
+            } else {
+                edgeCallback.call(context, edge);
+            }
+            ;
         });
     });
 };

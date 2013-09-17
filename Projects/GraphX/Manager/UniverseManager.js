@@ -1,5 +1,5 @@
 
-var UniverseManager = function() {
+var UniverseManager = function(container) {
     this.settings;
     this.initializationFailed;
     this.random;
@@ -11,12 +11,12 @@ var UniverseManager = function() {
     this.assemblyManager;
     this.fileDownloadManager;
 
-    this.init();
+    this.init(container);
 };
 
 UniverseManager.prototype = {
-    init: function() {
-        this.graphManager = new GraphManager();
+    init: function(container) {
+        this.graphManager = new GraphManager(container);
         this.initializeViewManager();
         this.canvasManager = new CanvasManager();
         this.physicsManager = new PhysicsManager(this);

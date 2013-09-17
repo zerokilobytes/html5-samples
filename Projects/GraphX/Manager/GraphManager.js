@@ -2,7 +2,7 @@
  * 
  * @returns {GraphManager}
  */
-var GraphManager = function() {
+var GraphManager = function(container) {
     this.canvas = null;
     this.stage = null;
     this.graph = null;
@@ -14,7 +14,7 @@ var GraphManager = function() {
     settings = null;
     this.timer;
 
-    this.init();
+    this.init(container);
 };
 
 /**
@@ -22,7 +22,7 @@ var GraphManager = function() {
  * @type GraphManager
  */
 GraphManager.prototype = {
-    init: function() {
+    init: function(container) {
 
         this.nodeList = [];
         this.linkList = [];
@@ -30,7 +30,7 @@ GraphManager.prototype = {
         this.timer = null;
 
         this.stage = new Kinetic.Stage({
-            container: 'graphx_canvas',
+            container: container,
             width: Browser.getSize().width,
             height: Browser.getSize().height
         });
@@ -39,9 +39,7 @@ GraphManager.prototype = {
         this.stage.add(this.graph.layer);
     },
     getCanvas2D: function() {
-        var canvas = document.getElementById('graphx_canvas');
-        var context = canvas.getContext('2d');
-        return context;
+
     },
     getStage: function() {
         return this.stage;
