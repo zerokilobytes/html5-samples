@@ -74,7 +74,7 @@ GraphManager.prototype = {
         var link = new Edge(text, nodeFrom, nodeTo);
 
 
-        link.strength = 0.10;
+        link.strength = 1.0;
         link.styleName = "";
         link.verb = text;
 

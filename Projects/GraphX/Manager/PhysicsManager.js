@@ -1,14 +1,13 @@
-var PhysicsManager = function(mainManager) {
+var PhysicsManager = function() {
     this.particleSystem;
     this.settings;
     this.timer;
 
-    this.init(mainManager);
+    this.init();
 };
 
 PhysicsManager.prototype = {
-    init: function(mainManager)
-    {
+    init: function(){
         this.particleSystem = new ParticleSystem();
         this.particleSystem.setGravity(new Vector3D(0.0, 0.0, 0.0));
         this.timer = null;

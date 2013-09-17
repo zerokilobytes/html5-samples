@@ -25,4 +25,4 @@ var NeuroGraph = function(container, graphData) {
     function createEdge(element) {
         universe.createEdge("", element.source, element.target);
     }
-}('$neuro_graph', "sample.graphml");
+}('$neuro_graph', "data/simple.graphml");

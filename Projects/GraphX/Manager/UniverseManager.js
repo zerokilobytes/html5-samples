@@ -40,8 +40,8 @@ UniverseManager.prototype = {
     createNode: function(id, title, type) {
         var node = this.graphManager.createNode(id, title, type);
         node.guid = NumberFunc.getRandomInt(1, NumberFunc.MAX_VALUE);
-        var x = NumberFunc.getRandomArbitrary(1, 600);
-        var y = NumberFunc.getRandomArbitrary(1, 600);
+        var x = NumberFunc.getRandomArbitrary(1, 1200);
+        var y = NumberFunc.getRandomArbitrary(1, 1200);
         var z = 0;
 
         // set the physic representation of our link
