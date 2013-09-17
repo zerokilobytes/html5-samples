@@ -1,68 +1,31 @@
 var universe = null;
-var time;
-var timeDiff;
 
-window.requestAnimFrame = (function(callback)
-{
-    return window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.oRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            function(callback)
-            {
-                window.setTimeout(callback, 1000 / 60);
-            };
-})();
-
-
-/*window.requestAnimFrame = (function(callback)
- {
- return function(callback)
- {
- window.setTimeout(callback, 1000/60);
- };
- })();
- */
-
-function Update(time) {
-    //console.log(universe);
-    universe.update(timeDiff);
-}
-
-function Loop(lastTime)
-{
-    var date = new Date();
-    time = date.getTime();
-    timeDiff = time - lastTime;
-
-
-
-    Update(timeDiff);
-
-
-    Draw();
-
-    // request new frame
-    requestAnimFrame(function() {
-        Loop(time);
-    });
-
-}
-function Draw() {
+function loop() {
+    universe.update(null);
     universe.draw();
-}
-/*
- //Windows focus
- document.onfocusin = onFocus;
- document.onfocusout = onBlur;
- window.onfocus = onFocus;
- window.onblur = onBlur;
- */
 
+    requestAnimFrame(function() {
+        loop();
+    });
+}
 window.onload = function() {
-    var date = new Date();
-    var time = date.getTime();
     init();
-    Loop(time);
+    loop();
 };
+
+function init() {
+    universe = new UniverseManager();
+    var node1 = universe.createNode("", "");
+    var node2 = universe.createNode("", "");
+    var node3 = universe.createNode("", "");
+
+    var node4 = universe.createNode("", "");
+    //node1.physicRepresentation.makeFixed();
+
+    universe.createEdge("", node1, node2);
+    universe.createEdge("", node1, node3);
+    universe.createEdge("", node2, node3);
+    universe.createEdge("", node1, node4);
+
+    universe.physicsManager.settings_Changed();
+}
