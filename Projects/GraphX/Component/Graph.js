@@ -53,12 +53,13 @@ Graph.prototype = {
         //this.move();
         for (var i = 0; i < this.nodes.length; i++) {
             node = this.nodes[i];
-            node.update();
             node.content.setZIndex(10);
+            node.update();
         }
         
         for (var i = 0; i < this.edges.length; i++) {
             edge = this.edges[i];
+            edge.content.setZIndex(1);
             edge.update();
         }
     },

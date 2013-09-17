@@ -31,8 +31,8 @@ GraphManager.prototype = {
 
         this.stage = new Kinetic.Stage({
             container: 'graphx_canvas',
-            width: 1000,
-            height: 800
+            width: Browser.getSize().width,
+            height: Browser.getSize().height
         });
 
         this.graph = new Graph();

@@ -3,14 +3,14 @@
     <head>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script src="Vendor/kinetic.js"></script>
+        
+        <script src="Utility/Map.js"></script>
+        <script src="Utility/Browser.js"></script>
 
         <script src="Mathematics/Vector3D.js"></script>
         <script src="Mathematics/Integrator.js"></script>
         <script src="Mathematics/NumberFunc.js"></script>
-        
         <script src="Mathematics/Arithmetic.js"></script>
-
-        <script src="Utility/Map.js"></script>
 
         <script src="Physics/PhysicsConstants.js"></script>
         <script src="Physics/Particle.js"></script>
@@ -20,12 +20,10 @@
         <script src="Physics/Attraction.js"></script>
 
         <script src="Manager/KeyManager.js"></script>
-
         <script src="Manager/PhysicsManager.js"></script>
         <script src="Manager/CanvasManager.js"></script>
         <script src="Manager/GraphManager.js"></script>
         <script src="Manager/UniverseManager.js"></script>
-
 
         <script src="Component/Settings.js"></script>
         <script src="Component/Graph.js"></script>
@@ -41,14 +39,18 @@
                 universe = new UniverseManager();
                 var node1 = universe.createNode("", "");
                 var node2 = universe.createNode("", "");
-                var node3 =universe.createNode("", "");
+                var node3 = universe.createNode("", "");
                 
+                var node4 = universe.createNode("", "");
+
                 //node1.physicRepresentation.makeFixed();
-                
+
                 universe.createEdge("", node1, node2);
                 universe.createEdge("", node1, node3);
                 universe.createEdge("", node2, node3);
                 
+                universe.createEdge("", node1, node4);
+
                 //console.log(node1.physicRepresentation.isFree());
                 //node1.physicRepresentation.makeFixed();
                 

@@ -1,7 +1,7 @@
 var universe = null;
 var time;
 var timeDiff;
-/*
+
 window.requestAnimFrame = (function(callback)
 {
     return window.requestAnimationFrame ||
@@ -13,20 +13,21 @@ window.requestAnimFrame = (function(callback)
             {
                 window.setTimeout(callback, 1000 / 60);
             };
-})();*/
-
-
-window.requestAnimFrame = (function(callback)
-{
-    return function(callback)
-            {
-                window.setTimeout(callback, 1000/60);
-            };
 })();
+
+
+/*window.requestAnimFrame = (function(callback)
+ {
+ return function(callback)
+ {
+ window.setTimeout(callback, 1000/60);
+ };
+ })();
+ */
 
 function Update(time) {
     //console.log(universe);
-	universe.update(timeDiff);
+    universe.update(timeDiff);
 }
 
 function Loop(lastTime)
@@ -39,7 +40,7 @@ function Loop(lastTime)
 
     Update(timeDiff);
 
-    
+
     Draw();
 
     // request new frame
